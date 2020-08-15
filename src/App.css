@@ -1,0 +1,237 @@
+.app {
+  margin: 20px;
+  margin-top: 30px;
+  margin-left: 40px;
+}
+.app h1 {
+  margin-bottom: 30px;
+}
+.title-inner {
+  display: flex;
+  align-items: center;
+}
+.title-inner button {
+  margin-left: 20px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #424242;
+  font-family: inherit;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  border: 1px solid #e9ebeb;
+  border-bottom-color: #e1e3e3;
+  border-radius: 4px;
+  background-color: #fff;
+  color: rgba(14,30,37,.87);
+  box-shadow: 0 2px 4px 0 rgba(14,30,37,.12);
+  transition: all .2s ease;
+  transition-property: background-color,color,border,box-shadow;
+  outline: 0;
+  font-weight: 500;
+  background: #00ad9f;
+  color: #fff;
+  border-color: transparent;
+}
+.primary-button {
+  padding: 13px 18px;
+}
+.primary-button:hover {
+  background: #00c2b2;
+}
+
+.search {
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 11px 15px;
+  min-width: 300px;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(120,130,152,.25);
+  border: none;
+  outline: none;
+  transition: all .3s ease;
+  margin: 20px 0;
+}
+.search:active, .search:focus, .search:hover {
+  box-shadow: 0 0 0 2px #00ad9f;
+}
+
+.header {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px !important;
+}
+.item {
+  text-align: center;
+}
+.site-wrapper, .site-wrapper-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+.site-wrapper-header {
+  padding-left: 15px;
+}
+.site-wrapper:hover {
+  background: rgba(14,30,37,.05);
+}
+.site-screenshot, .site-screenshot-header {
+  height: 64px;
+  margin: 0 24px 0 0;
+  min-width: 102.4px;
+  position: relative;
+}
+.site-screenshot-header {
+  height: 30px;
+}
+.site-screenshot:before {
+  background: #dadcdd;
+  bottom: 0;
+  content: " ";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.site-screenshot a {
+  display: block;
+  position: relative;
+  z-index: 9;
+  height: 100%;
+}
+.site-screenshot img {
+  position: relative;
+  width: 100%;
+  width: 102.4px;
+  border: none;
+}
+.site-screenshot img[alt]:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dadcdd;
+  font-weight: 300;
+  line-height: 2;
+  text-align: center;
+  content: '';
+}
+.site-info {
+  min-width: 370px;
+  max-width: 370px;
+}
+.site-info h2 {
+  margin: 0px;
+  margin-bottom: 5px;
+}
+.site-info a {
+  text-decoration: none;
+}
+.site-meta a {
+  font-size: 14px;
+  color: rgba(14,30,37,.8);
+}
+.site-publish-time {
+  min-width: 150px;
+}
+.site-create-time {
+  min-width: 130px;
+}
+.site-team {
+  min-width: 200px;
+}
+.site-functions {
+  min-width: 100px;
+}
+.site-repo-link {
+  font-size: 12px;
+}
+
+@media (max-width: 1400px) {
+  .site-repo-link {
+    display: none;
+  }
+}
+
+@media (max-width: 1150px) {
+  .site-functions {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .site-team {
+    display: none;
+  }
+}
+
+@media (max-width: 830px) {
+  .site-create-time {
+    display: none;
+  }
+  .search {
+    appearance: none;
+    border: 1px solid rgba(120,130,152,.25);
+    font-size: 16px;
+  }
+  .site-screenshot img[alt]:after {
+    content: none;
+  }
+  .site-screenshot, .site-screenshot img {
+    background: #dadcdd;
+    min-height: 50px;
+    min-width: 78px;
+    width: 78px;
+    height: 50px;
+    margin: 0 20px 0 0;
+  }
+  .site-info {
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 720px) {
+  .app {
+    margin: 15px;
+    margin-top: 20px;
+  }
+  .app h1 {
+    font-size: 22px;
+    margin-bottom: inherit;
+  }
+  .title-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .title-inner button {
+    margin-right: 40px;
+  }
+  .contents {
+    overflow: hidden;
+  }
+  .contents input {
+    margin-left: 3px;
+  }
+  .site-wrapper, .site-wrapper-header {
+    padding-left: 10px;
+  }
+  .site-publish-time {
+    display: none;
+  }
+  .site-info h2 {
+    font-size: 18px;
+  }
+  .site-meta a {
+    font-size: 13px;
+  }
+}
