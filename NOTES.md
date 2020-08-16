@@ -25,3 +25,13 @@ https://developer.amazon.com/apps-and-games/login-with-amazon
   - Create a New Security Profile
   - Enable Security Profile for LWA
   - Add your Website to your Security Profile
+
+2. Add a Login with Amazon Button to your website
+
+```html
+<a href id="LoginWithAmazon">
+    <img border="0" alt="Login with Amazon"
+        src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+        width="156" height="32" />
+ </a>
+ ```
