@@ -2,11 +2,23 @@ import React from "react";
 import classes from "./App.module.css";
 
 const App = () => {
+  const onClick = () => {
+    const options = {};
+    options.scope = "profile";
+    options.scope_data = {
+      profile: { essential: false },
+    };
+
+    const amazon = window.amazon;
+    amazon.Login.authorize(options, 'https://www.example.com/handle_login.php');
+    return false;
+  };
+
   return (
     <div className={classes.App}>
       <h1>OAuth Practice App</h1>
 
-      <a href id="LoginWithAmazon">
+      <a href id="LoginWithAmazon" onClick={onClick}>
         <img
           border="0"
           alt="Login with Amazon"
