@@ -2,6 +2,20 @@ import React from "react";
 import classes from "./App.module.css";
 
 const App = () => {
+  window.onAmazonLoginReady = function () {
+    window.amazon.Login.setClientId(
+      process.env.REACT_APP_LWA_CLIENT_ID
+    );
+  };
+  (function (d) {
+    var a = d.createElement("script");
+    a.type = "text/javascript";
+    a.async = true;
+    a.id = "amazon-login-sdk";
+    a.src = "https://assets.loginwithamazon.com/sdk/na/login1.js";
+    d.getElementById("amazon-root").appendChild(a);
+  })(document);
+
   const onClick = () => {
     const options = {};
     options.scope = "profile";
