@@ -18,7 +18,7 @@ const App = () => {
     <div className={classes.App}>
       <h1>OAuth Practice App</h1>
 
-      <a href id="LoginWithAmazon" onClick={onClick}>
+      <div id="LoginWithAmazon" onClick={onClick}>
         <img
           border="0"
           alt="Login with Amazon"
@@ -26,7 +26,7 @@ const App = () => {
           width="156"
           height="32"
         />
-      </a>
+      </div>
     </div>
   );
 };
