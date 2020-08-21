@@ -24,7 +24,7 @@ const App = () => {
     };
 
     const amazon = window.amazon;
-    amazon.Login.authorize(options, 'https://www.example.com/handle_login.php');
+    amazon.Login.authorize(options, `${process.env.REACT_APP_WEBSITE_URL}/.netlify/functions/amazon-login`);
     return false;
   };
 

@@ -2,6 +2,7 @@
 
 - https://docs.netlify.com/visitor-access/oauth-provider-tokens/#setup-and-settings
 - https://www.youtube.com/watch?v=LN8cL2yPR3c
+- https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html
 
 ## Steps
 
@@ -70,3 +71,9 @@ app.get('/auth/amazon/callback',
 ```
 
 - Investigate tutorial: https://markus.oberlehner.net/blog/implementing-an-authentication-flow-with-passport-and-netlify-functions/
+
+Auth Flow:
+
+- Click LWA Button
+- Get redirected to https://na.account.amazon.com/ap/oa?arb=[uuid] to Allow or Cancel
+- Clicking allow sets the cookie with name: `amazon_Login_state_cache`
