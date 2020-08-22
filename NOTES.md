@@ -77,3 +77,9 @@ Auth Flow:
 - Click LWA Button
 - Get redirected to https://na.account.amazon.com/ap/oa?arb=[uuid] to Allow or Cancel
 - Clicking allow sets the cookie with name: `amazon_Login_state_cache`
+
+
+## LocalTunnel Sidetrack
+
+https://github.com/localtunnel/nginx
+https://github.com/localtunnel/localtunnel
