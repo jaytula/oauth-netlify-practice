@@ -79,6 +79,46 @@ Auth Flow:
 - Clicking allow sets the cookie with name: `amazon_Login_state_cache`
 
 
+### Redirects with Authorization Response
+
+```
+HTTP/1.1 302 Found
+Location: https://client.example.com/cb?code=SplxlOBezQQYbYS6WxSbIA
+&state=208257577ll0975l93l2l59l895857093449424
+&scope=profile
+```
+
+### Authorization Errors
+
+**Omitted**
+
+### Access Token Request
+
+https://developer.amazon.com/docs/login-with-amazon/authorization-code-grant.html#access-token-request
+
+- Make secure HTTP POST to `https://api.amazon.com/auth/o2/token`
+- POST should have required parameter for server apps: `grant_type`, `code`, `redirect_uri`, `client_id`, `client_secret`
+
+```
+POST /auth/o2/token HTTP/1.1
+Host: api.amazon.com
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+
+grant_type=authorization_code
+&code=SplxlOBezQQYbYS6WxSbIA
+&client_id=foodev
+&client_secret=Y76SDl2F
+```
+
+```js
+axios.post('https://api.amaxon.com/auth/o2/token', {
+  grant_type: 'authorization_code',
+  code: query.code,
+  // redirect_uri: '?',
+  client_id: process.env.AMAZON_O2_CLIENT_ID,
+  client_secret: process.env.AMAZON_O2_CLIENT_SECRET
+})
+
 ## LocalTunnel Sidetrack
 
 https://github.com/localtunnel/nginx
