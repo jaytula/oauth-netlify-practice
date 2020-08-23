@@ -17,14 +17,18 @@ const App = () => {
   })(document);
 
   const onClick = () => {
-    const options = {};
-    options.scope = "profile";
-    options.scope_data = {
-      profile: { essential: false },
-    };
+  //   const options = {};
+  //   options.scope = "profile";
+  //   options.scope_data = {
+  //     profile: { essential: false },
+  //   };
 
     const amazon = window.amazon;
-    amazon.Login.authorize(options, `${process.env.REACT_APP_WEBSITE_URL}/.netlify/functions/amazon-login`);
+    amazon.Login.authorize({
+      scope: 'profile',
+      response_type: 'code',
+      state: 'lulu',
+    }, `${process.env.REACT_APP_WEBSITE_URL}/.netlify/functions/amazon-login`);
     return false;
   };
 
