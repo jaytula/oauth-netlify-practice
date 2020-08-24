@@ -118,6 +118,7 @@ axios.post('https://api.amaxon.com/auth/o2/token', {
   client_id: process.env.AMAZON_O2_CLIENT_ID,
   client_secret: process.env.AMAZON_O2_CLIENT_SECRET
 })
+```
 
 ## LocalTunnel Sidetrack
 
