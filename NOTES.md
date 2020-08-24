@@ -120,6 +120,20 @@ axios.post('https://api.amaxon.com/auth/o2/token', {
 })
 ```
 
+### Using Refresh Tokens
+
+```
+POST /auth/o2/token HTTP/1.1
+Host: api.amazon.com
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+
+grant_type=refresh_token
+&refresh_token=Atzr|IQEBLzAtAhRPpMJxdwVz2Nn6f2y-tpJX2DeX...
+&client_id=foodev
+&client_secret=Y76SDl2F
+```
+
+
 ## LocalTunnel Sidetrack
 
 https://github.com/localtunnel/nginx
