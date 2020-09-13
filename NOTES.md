@@ -15,6 +15,10 @@
 
 https://en.wikipedia.org/wiki/List_of_OAuth_providers
 
+## Required: Environment variables:
+
+- `REACT_APP_LWA_CLIENT_ID`
+- `REACT_APP_WEBSITE_URL`
 
 ## Providers
 
