@@ -17,6 +17,19 @@ exports.handler = async (event, context) => {
   console.log(accessTokenResponse.data);
   // Successful response has access_token, token_type, expires_in, and refresh_token
 
+  // Get User Profile
+  // https://developer.amazon.com/docs/login-with-amazon/obtain-customer-profile.html
+  // Clients may ask the user to share some personal information from their Amazon profile,
+  // including name, email address, and zip code
+
+  const userProfile = await axios.get('https://api.amazon.com/user/profile', {
+    params: {
+      access_token: accessTokenResponse.data.access_token
+    }
+  })
+
+  console.log(userProfile.data);
+
   return {
     statusCode: 200,
     body: "abc",
