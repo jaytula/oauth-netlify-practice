@@ -27,3 +27,6 @@ src/stub.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+jwtRS256.key
+jwtRS256.key.pub
