@@ -5,6 +5,7 @@
   "dependencies": {
     "aws-sdk": "^2.734.0",
     "netlify": "^2.4.0",
+    "netlify-lambda": "^2.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
