@@ -30,3 +30,4 @@ yarn-error.log*
 
 jwtRS256.key
 jwtRS256.key.pub
+/lambda
