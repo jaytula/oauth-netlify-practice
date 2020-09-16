@@ -1,7 +1,4 @@
-const JWT_PUBLIC_KEY = Buffer.from(
-  process.env.JWT_PUBLIC_KEY,
-  "base64"
-).toString("ascii");
+import { JWT_PUBLIC_KEY } from "./helpers/jwt-helper";
 
 export const handler = event => {
   return {
