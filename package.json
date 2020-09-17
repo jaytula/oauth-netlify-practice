@@ -3,21 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-transform-object-assign": "^7.10.4",
     "aws-sdk": "^2.734.0",
     "netlify": "^2.4.0",
-    "netlify-lambda": "^2.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
-    "time-ago": "^0.2.1"
+    "time-ago": "^0.2.1",
+    "typescript": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "npm-run-all --parallel build:**",
     "build:app": "react-scripts build",
-    "build:functions": "netlify-lambda build ./functions",
+    "build:functions": "netlify-lambda build functions",
     "deploy": "npm run build && netlify deploy -p",
-    "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\""
+    "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\"",
+    "local-serve": "concurrently \"netlify-lambda serve --config ./webpack.functions.js functions\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,10 +31,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/aws-lambda": "^8.10.62",
+    "@types/node": "^14.10.3",
     "concurrently": "^5.3.0",
+    "dotenv-webpack": "^2.0.0",
     "localtunnel": "^2.0.0",
     "netlify-cli": "^2.63.2",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^4.0.2"
+    "netlify-lambda": "^2.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }
