@@ -19,7 +19,8 @@
     "build:functions": "netlify-lambda build functions",
     "deploy": "npm run build && netlify deploy -p",
     "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\"",
-    "local-serve": "concurrently \"netlify-lambda serve --config ./webpack.functions.js src/functions\""
+    "local-serve": "concurrently \"netlify-lambda serve --config ./webpack.functions.js src/functions\"",
+    "lambda": "netlify-lambda serve --config ./webpack.functions.js src/functions"
   },
   "eslintConfig": {
     "extends": "react-app"
