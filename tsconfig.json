@@ -21,6 +21,6 @@
   },
   "include": [
     "src",
-    "functions"
+    "src/functions"
   ]
 }
