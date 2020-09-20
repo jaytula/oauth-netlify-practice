@@ -1,15 +1,13 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
-console.log("setupProxy");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.use(
-    '/.netlify/functions/',
+    "/.netlify/functions/",
     createProxyMiddleware({
-      target: 'http://localhost:9000/',
-      changeOrigin: true,
+      target: "http://localhost:9000/",
       pathRewrite: {
         "^/\\.netlify/functions": "",
-      }
+      },
     })
   );
 };
