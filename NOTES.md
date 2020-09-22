@@ -146,8 +146,3 @@ https://github.com/localtunnel/localtunnel
 ```shell
 lt -h https://serverless.social -p 8888 -s crackly-banal
 ```
-
-## Problems
-
-- `simple-oauth2` requires nodejs runtime 12 which and netlify-lambda serve runs
-nodejs runtime 8

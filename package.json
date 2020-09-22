@@ -21,11 +21,8 @@
     "start": "react-scripts start",
     "build": "npm-run-all --parallel build:**",
     "build:app": "react-scripts build",
-    "build:functions": "netlify-lambda build src/functions",
     "deploy": "npm run build && netlify deploy -p",
-    "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\"",
-    "local-serve": "concurrently \"npm run start\" \"netlify-lambda serve --config ./webpack.functions.js src/functions\"",
-    "lambda": "netlify-lambda serve --config ./webpack.functions.js src/functions"
+    "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,7 +44,6 @@
     "dotenv-webpack": "^2.0.0",
     "localtunnel": "^2.0.0",
     "netlify-cli": "^2.63.2",
-    "netlify-lambda": "^2.0.1",
     "npm-run-all": "^4.1.5",
     "typescript": "^4.0.3"
   }
