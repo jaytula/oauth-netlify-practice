@@ -22,6 +22,7 @@
     "build": "npm-run-all --parallel build:**",
     "build:app": "react-scripts build",
     "build:lambda": "cd lambda && tsc && cd ..",
+    "dev": "concurrently \"netlify dev\" \"tsc -p ./lambda -w\"",
     "deploy": "npm run build && netlify deploy -p",
     "local": "concurrently \"netlify dev\" \"lt -h https://serverless.social -p 8888 -s black-garlic\""
   },
