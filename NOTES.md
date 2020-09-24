@@ -144,5 +144,5 @@ https://github.com/localtunnel/nginx
 https://github.com/localtunnel/localtunnel
 
 ```shell
-lt -h https://serverless.social -p 8888 -s crackly-banal
+lt -h https://serverless.social -p 8888 -s subdomain
 ```
