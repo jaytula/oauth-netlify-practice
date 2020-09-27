@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./App.module.css";
+import Layout from "./components/Layout/Layout";
 
 const App = () => {
   window.onAmazonLoginReady = function () {
@@ -33,19 +34,21 @@ const App = () => {
   };
 
   return (
-    <div className={classes.App}>
-      <h1>OAuth Practice App</h1>
-
-      <div id="LoginWithAmazon" onClick={onClick}>
-        <img
-          border="0"
-          alt="Login with Amazon"
-          src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
-          width="156"
-          height="32"
-        />
+    <Layout>
+      <div className={classes.App}>
+        <h1>OAuth Practice App</h1>
+  
+        <div id="LoginWithAmazon" onClick={onClick}>
+          <img
+            border="0"
+            alt="Login with Amazon"
+            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+            width="156"
+            height="32"
+          />
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
