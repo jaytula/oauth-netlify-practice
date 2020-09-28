@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NetlifyAPI from 'netlify'
 import timeAgo from 'time-ago'
-import { csrfToken, parseHash, removeHash } from './utils/auth'
+import { csrfToken, parseHash, removeHash } from '../../../utils/auth'
 import {
   sortByDate,
   sortByPublishDate,
@@ -9,14 +9,12 @@ import {
   sortByFunctions,
   sortByRepo,
   matchText
-} from './utils/sort'
-import ForkMe from './components/ForkMe'
-import loginButton from './assets/netlify-login-button.svg'
+} from '../../../utils/sort'
+import ForkMe from '../../ForkMe'
+import loginButton from '../../../assets/netlify-login-button.svg'
 import './NetlifyApp.css'
 
-// import stub from './stub'
-
-export default class App extends Component {
+class NetlifyApp extends Component {
   constructor(props, context) {
     super(props, context)
     console.log('window.location.hash', window.location.hash)
@@ -319,3 +317,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default NetlifyApp;
