@@ -1,4 +1,4 @@
-const { config, oauth } = require('./utils/auth')
+const { config, oauth } = require('./utils/netlify-auth')
 
 /* Do initial auth redirect */
 exports.handler = async (event, context) => {
