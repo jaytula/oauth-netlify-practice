@@ -70,7 +70,7 @@ class NetlifyApp extends Component {
     localStorage.setItem(state, 'true')
     /* Do redirect */
     const redirectTo = `${location.origin}${location.pathname}`
-    window.location.href = `/.netlify/functions/auth-start?url=${redirectTo}&csrf=${state}`
+    window.location.href = `/.netlify/functions/netlify-auth-start?url=${redirectTo}&csrf=${state}`
   }
   handleLogout = e => {
     e.preventDefault()

@@ -1,7 +1,8 @@
-const { config, authorizationCodeClient } = require("./utils/netlify-auth");
+import { APIGatewayEvent } from "aws-lambda";
+import { authorizationCodeClient, REDIRECT_URL } from "./utils/netlify-auth";
 
 /* Do initial auth redirect */
-exports.handler = async (event, context) => {
+export const handler = async (event: APIGatewayEvent) => {
   if (!event.queryStringParameters) {
     return {
       statusCode: 401,
@@ -14,9 +15,10 @@ exports.handler = async (event, context) => {
   const csrfToken = event.queryStringParameters.csrf;
   const redirectUrl = event.queryStringParameters.url;
 
+
   /* Generate authorizationURI */
   const authorizationURI = authorizationCodeClient.authorizeURL({
-    redirect_uri: config.redirect_uri,
+    redirect_uri: REDIRECT_URL,
     /* Specify how your app needs to access the user’s account. */
     scope: "",
     /* State helps mitigate CSRF attacks & Restore the previous state of your app */
