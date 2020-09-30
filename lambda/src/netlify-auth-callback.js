@@ -1,5 +1,5 @@
 const querystring = require('querystring')
-const { config, oauth } = require('./utils/netlify-auth')
+const { config, authorizationCodeClient } = require('./utils/netlify-auth')
 const { getUser } = require('./utils/netlify-api')
 
 /* Function to handle netlify auth callback */
@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
 
   try {
     /* Take the grant code and exchange for an accessToken */
-    const authorizationToken = await oauth.authorizationCode.getToken({
+    const authorizationToken = await authorizationCodeClient.getToken({
       code: code,
       redirect_uri: config.redirect_uri,
       client_id: config.clientId,

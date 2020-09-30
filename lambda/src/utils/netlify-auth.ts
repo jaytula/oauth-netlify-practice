@@ -1,4 +1,4 @@
-import simpleOauth from 'simple-oauth2'
+import {AuthorizationCode, ModuleOptions} from 'simple-oauth2'
 
 // https://www.npmjs.com/package/simple-oauth2
 // https://github.com/lelylan/simple-oauth2/blob/HEAD/API.md#options
@@ -16,10 +16,10 @@ const REDIRECT_URL = `${SITE_URL}/.netlify/functions/auth-callback`
 //   redirect_uri: REDIRECT_URL,
 // }
 
-const config = {
+export const config: ModuleOptions = {
   client: {
-    id: process.env.NETLIFY_OAUTH_CLIENT_ID,
-    secret: process.env.NETLIFY_OAUTH_CLIENT_SECRET,
+    id: process.env.NETLIFY_OAUTH_CLIENT_ID as string,
+    secret: process.env.NETLIFY_OAUTH_CLIENT_SECRET as string,
   },
   auth: {
     tokenHost: 'https://api.netlify.com',
@@ -28,19 +28,4 @@ const config = {
   }
 }
 
-module.exports = {
-  /* Export config for functions */
-  config: config,
-  /* Create oauth2 instance to use in our functions */
-  oauth: simpleOauth.create({
-    client: {
-      id: config.client.id,
-      secret: config.client.secret
-    },
-    auth: {
-      tokenHost: config.auth.tokenHost,
-      tokenPath: config.auth.tokenPath,
-      authorizePath: config.auth.authorizePath
-    }
-  })
-}
+export const authorizationCodeClient = new AuthorizationCode(config);
