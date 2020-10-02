@@ -3,7 +3,7 @@ import {AuthorizationCode, ModuleOptions} from 'simple-oauth2'
 // https://www.npmjs.com/package/simple-oauth2
 // https://github.com/lelylan/simple-oauth2/blob/HEAD/API.md#options
 
-const SITE_URL = process.env.URL || 'http://localhost:3000' as string
+const SITE_URL = process.env.REACT_APP_WEBSITE_URL || 'http://localhost:3000' as string
 
 /* Auth values */
 const USER_PROFILE_URL = 'https://api.netlify.com/api/v1/user'
