@@ -1,6 +1,6 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
-async function getUser(token) {
+export const getUser = async (token: string) => {
   const url = `https://api.netlify.com/api/v1/user/`
   const response = await fetch(url, {
     method: 'GET',
