@@ -5,6 +5,7 @@ import {
 } from "./utils/netlify-auth";
 import { getUser } from "./utils/netlify-api";
 import { APIGatewayEvent } from "aws-lambda";
+import { createJwtCookie } from "./helpers/jwt-helper";
 
 /* Function to handle netlify auth callback */
 export const handler = async (event: APIGatewayEvent) => {
@@ -32,12 +33,14 @@ export const handler = async (event: APIGatewayEvent) => {
 
     const user = await getUser(authorizationToken.token.access_token);
 
+    const jwtCookie = createJwtCookie('sampleEmail', 'sampleUserId')
+
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user, null, 2),
+      body: JSON.stringify({user, jwtCookie}, null, 2),
     };
 
 
