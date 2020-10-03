@@ -30,28 +30,16 @@ export const handler = async (event: APIGatewayEvent) => {
       redirect_uri: REDIRECT_URL,
     });
 
-    // const authResult = oauth.accessToken.create(authorizationToken)
+    const user = await getUser(authorizationToken.token.access_token);
 
-    // const token = authResult.token.access_token
-
-    const json = JSON.stringify(authorizationToken, null, 2);
-
-    // authorizationToken looks like this:
-    // {
-    //   "access_token": "L4ZnR0AV_hIpb8iDPKMCLno9iWhf3zb48VU0ln5cs5Y",
-    //   "token_type": "Bearer",
-    //   "scope": "public",
-    //   "created_at": 1601662279
-    // }
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
       },
-      body: json,
+      body: JSON.stringify(user, null, 2),
     };
 
-    // const user = await getUser(token);
 
     // return {
     //   statusCode: 200,
