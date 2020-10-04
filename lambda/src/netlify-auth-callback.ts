@@ -39,6 +39,7 @@ export const handler = async (event: APIGatewayEvent) => {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
+        "Set-Cookie": jwtCookie
       },
       body: JSON.stringify({user, jwtCookie}, null, 2),
     };
