@@ -10,6 +10,7 @@
     "cookie": "^0.4.1",
     "http-proxy-middleware": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.7",
     "netlify": "^2.4.0",
     "node-fetch": "^2.6.1",
     "querystring": "^0.2.0",
