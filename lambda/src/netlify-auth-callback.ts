@@ -35,7 +35,6 @@ export const handler = async (event: APIGatewayEvent) => {
     const jwtCookie = createJwtCookie(user.email, user.id);
 
     await connectToDatabase();
-    console.log(User.build);
 
     const existingUser = await User.findOne({ email: user.email });
 
