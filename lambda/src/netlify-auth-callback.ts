@@ -1,8 +1,5 @@
 import querystring from "querystring";
-import {
-  authorizationCodeClient,
-  REDIRECT_URL,
-} from "./utils/netlify-auth";
+import { authorizationCodeClient, REDIRECT_URL } from "./utils/netlify-auth";
 import { getUser } from "./utils/netlify-api";
 import { APIGatewayEvent } from "aws-lambda";
 import { createJwtCookie } from "./helpers/jwt-helper";
@@ -35,23 +32,28 @@ export const handler = async (event: APIGatewayEvent) => {
 
     const user = await getUser(authorizationToken.token.access_token);
 
-    const jwtCookie = createJwtCookie(user.email, user.id)
+    const jwtCookie = createJwtCookie(user.email, user.id);
 
-    await connectToDatabase()
+    await connectToDatabase();
     console.log(User.build);
-    const newUser = User.build({
-      email: user.email
-    })
 
-    await newUser.save();
+    const existingUser = await User.findOne({ email: user.email });
+
+    if (!existingUser) {
+      const newUser = User.build({
+        email: user.email,
+      });
+
+      await newUser.save();
+    }
 
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": jwtCookie
+        "Set-Cookie": jwtCookie,
       },
-      body: JSON.stringify({user, jwtCookie}, null, 2),
+      body: JSON.stringify({ user, jwtCookie }, null, 2),
     };
   } catch (e) {
     return {
