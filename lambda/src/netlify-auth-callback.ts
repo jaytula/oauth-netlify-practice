@@ -33,7 +33,7 @@ export const handler = async (event: APIGatewayEvent) => {
 
     const user = await getUser(authorizationToken.token.access_token);
 
-    const jwtCookie = createJwtCookie('sampleEmail', 'sampleUserId')
+    const jwtCookie = createJwtCookie(user.email, user.id)
 
     return {
       statusCode: 200,
@@ -43,40 +43,7 @@ export const handler = async (event: APIGatewayEvent) => {
       },
       body: JSON.stringify({user, jwtCookie}, null, 2),
     };
-
-
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify({
-    //     user: user,
-    //     authResult: authResult,
-    //     state: state,
-    //     encode: Buffer.from(token, 'binary').toString('base64')
-    //   })
-    // }
-
-    // const encodedUserData = querystring.stringify({
-    //   email: user.email || "NA",
-    //   full_name: user.full_name || "NA",
-    //   avatar: user.avatar_url || "NA",
-    // });
-
-    // const URI = `${state.url}#${encodedUserData}&csrf=${
-    //   state.csrf
-    // }&token=${Buffer.from(token, "binary").toString("base64")}`;
-    // console.log("URI", URI);
-    // /* Redirect user to authorizationURI */
-    // return {
-    //   statusCode: 302,
-    //   headers: {
-    //     Location: URI,
-    //     "Cache-Control": "no-cache", // Disable caching of this response
-    //   },
-    //   body: "", // return body for local dev
-    // };
   } catch (e) {
-    console.log("Access Token Error", e.message);
-    console.log(e);
     return {
       statusCode: e.statusCode || 500,
       body: JSON.stringify({
