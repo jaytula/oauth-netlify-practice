@@ -36,14 +36,18 @@ export const handler = async (event: APIGatewayEvent) => {
 
     await connectToDatabase();
 
-    const existingUser = await User.findOne({ email: user.email });
+    let existingUser = await User.findOne({ email: user.email });
 
     if (!existingUser) {
       const newUser = User.build({
         email: user.email,
       });
 
-      await newUser.save();
+      existingUser = await newUser.save();
+    }
+
+    if(!existingUser) {
+      throw new Error('existingUser should not be null');
     }
 
     return {
@@ -52,7 +56,7 @@ export const handler = async (event: APIGatewayEvent) => {
         "Content-Type": "application/json",
         "Set-Cookie": jwtCookie,
       },
-      body: JSON.stringify({ user, jwtCookie }, null, 2),
+      body: JSON.stringify({ existingUser, jwtCookie }, null, 2),
     };
   } catch (e) {
     return {
