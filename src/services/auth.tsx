@@ -20,7 +20,7 @@ const isLoggedIn = () => {
   return !!user.username
 }
 
-const handleLogin = (currentUser: ICurrentUser) {
+const handleLogin = (currentUser: ICurrentUser) => {
   return setUser(currentUser)
 }
 
