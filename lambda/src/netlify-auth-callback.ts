@@ -50,11 +50,18 @@ export const handler = async (event: APIGatewayEvent) => {
       throw new Error('existingUser should not be null');
     }
 
+    console.log({existingUser});
+
+    const searchParams = new URLSearchParams();
+    searchParams.append('id', existingUser._id);
+    searchParams.append('email', existingUser.email);
+
     return {
-      statusCode: 200,
+      statusCode: 302,
       headers: {
         "Content-Type": "application/json",
         "Set-Cookie": jwtCookie,
+        "Location": `/profile?${searchParams.toString()}`
       },
       body: JSON.stringify({ existingUser, jwtCookie }, null, 2),
     };
