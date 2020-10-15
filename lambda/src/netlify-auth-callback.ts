@@ -53,7 +53,7 @@ export const handler = async (event: APIGatewayEvent) => {
     console.log({existingUser});
 
     const searchParams = new URLSearchParams();
-    searchParams.append('id', existingUser._id);
+    searchParams.append('userId', existingUser._id);
     searchParams.append('email', existingUser.email);
 
     return {

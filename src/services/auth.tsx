@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 
 interface ICurrentUser {
-  username?: string;
+  userId?: string;
+  email?: string;
 }
 
 const isBrowser = () => typeof window !== 'undefined';
