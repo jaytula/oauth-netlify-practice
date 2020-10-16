@@ -1,14 +1,13 @@
 import React from "react";
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from "react-router-dom";
 import classes from "./App.module.css";
 import Layout from "./components/Layout/Layout";
 import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
 import NetlifyApp from "./components/Pages/NetlfiyApp/NetlifyApp";
 import ProfilePage from "./components/Pages/ProfilePage";
+import { AuthProvider } from "./services/auth";
 
-const App = () => {
-
-
+const AppRouter = () => {
   return (
     <BrowserRouter>
       <Layout>
@@ -22,5 +21,15 @@ const App = () => {
     </BrowserRouter>
   );
 };
+
+const withAuthProvider = Component => {
+  return () => (
+    <AuthProvider>
+      <Component />
+    </AuthProvider>
+  );
+};
+
+const App = withAuthProvider(AppRouter);
 
 export default App;
