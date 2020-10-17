@@ -4,12 +4,16 @@
 - https://www.youtube.com/watch?v=LN8cL2yPR3c
 - https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html
 
+## Requirements
+ - Node 12 is required
+
 ## Steps
 
 - Create an Oauth app at: https://app.netlify.com/user/applications/new
 - Specify environment variables from created OAuth app:
   - `NETLIFY_OAUTH_CLIENT_ID`
   - `NETLIFY_OAUTH_CLIENT_SECRET`
+  - `MONGODB_URI`
 
 **List of OAuth Providers**
 
