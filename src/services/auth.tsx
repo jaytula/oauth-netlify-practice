@@ -1,46 +1,47 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from "react";
 
 interface ICurrentUser {
   userId?: string;
   email?: string;
 }
 
-const isBrowser = () => typeof window !== 'undefined';
+const isBrowser = () => typeof window !== "undefined";
 
-const getUser = () =>
-  isBrowser() && window.localStorage.getItem('currentUser')
-  ? JSON.parse(window.localStorage.getItem('currentUser') as string)
-  : {}
+const getStoredUser = () =>
+  isBrowser() && window.localStorage.getItem("currentUser")
+    ? JSON.parse(window.localStorage.getItem("currentUser") as string)
+    : {};
 
-const setUser = (currentUser: ICurrentUser) =>
-  window.localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
+const setStoredUser = (currentUser: ICurrentUser) =>
+  window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
 const isLoggedIn = () => {
-  const user = getUser();
-  return !!user.username
-}
+  const user = getStoredUser();
+  return !!user.username;
+};
 
 const handleLogin = (currentUser: ICurrentUser) => {
-  return setUser(currentUser)
-}
+  return setStoredUser(currentUser);
+};
 
 const logout = (callback: Function) => {
-  setUser({})
+  setStoredUser({});
   callback();
-}
+};
 
 const AuthContext = React.createContext({
-  getUser,
+  getStoredUser,
   isLoggedIn,
   handleLogin,
   logout,
-})
+});
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider: React.FC = ({ children }) => (
-  <AuthContext.Provider value={{getUser, isLoggedIn, handleLogin, logout}}>
-    {children}
-  </AuthContext.Provider>
-)
+export const AuthProvider: React.FC = ({ children }) => {
+  return (
+    <AuthContext.Provider value={{ getStoredUser: getStoredUser, isLoggedIn, handleLogin, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

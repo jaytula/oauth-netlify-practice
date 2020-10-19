@@ -4,7 +4,7 @@ import { useAuth } from "../../services/auth";
 import classes from './Toolbar.module.css';
 
 const Toolbar: React.FC = ({ children }) => {
-  const { getUser } = useAuth();
+  const { getStoredUser: getUser } = useAuth();
 
   const user = getUser();
 

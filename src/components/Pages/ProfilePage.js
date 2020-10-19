@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../services/auth";
 
 const ProfilePage = () => {
-  const { getUser, handleLogin } = useAuth();
+  const { getStoredUser: getUser, handleLogin } = useAuth();
 
   const user = getUser();
   const urlParams = new URLSearchParams(window.location.search);
