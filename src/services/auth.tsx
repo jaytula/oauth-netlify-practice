@@ -15,10 +15,6 @@ const getStoredUser = () =>
 const setStoredUser = (currentUser: ICurrentUser) =>
   window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-const isLoggedIn = () => {
-  const user = getStoredUser();
-  return !!user.username;
-};
 
 
 
@@ -29,7 +25,6 @@ const logout = (callback: Function) => {
 
 const AuthContext = React.createContext({
   getStoredUser,
-  isLoggedIn,
   handleLogin: (currentUser: ICurrentUser) => {},
   logout,
 });
@@ -45,7 +40,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ getStoredUser, isLoggedIn, handleLogin, logout }}>
+    <AuthContext.Provider value={{ getStoredUser, handleLogin, logout }}>
       {children}
     </AuthContext.Provider>
   );
