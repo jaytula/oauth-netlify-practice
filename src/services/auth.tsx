@@ -20,9 +20,7 @@ const isLoggedIn = () => {
   return !!user.username;
 };
 
-const handleLogin = (currentUser: ICurrentUser) => {
-  return setStoredUser(currentUser);
-};
+
 
 const logout = (callback: Function) => {
   setStoredUser({});
@@ -32,15 +30,22 @@ const logout = (callback: Function) => {
 const AuthContext = React.createContext({
   getStoredUser,
   isLoggedIn,
-  handleLogin,
+  handleLogin: (currentUser: ICurrentUser) => {},
   logout,
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const [user, setUser] = useState<ICurrentUser>({userId: '', email: ''})
+
+  const handleLogin = (currentUser: ICurrentUser) => {
+    setUser(currentUser);
+    return setStoredUser(currentUser);
+  };
+
   return (
-    <AuthContext.Provider value={{ getStoredUser: getStoredUser, isLoggedIn, handleLogin, logout }}>
+    <AuthContext.Provider value={{ getStoredUser, isLoggedIn, handleLogin, logout }}>
       {children}
     </AuthContext.Provider>
   );
