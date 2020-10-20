@@ -23,10 +23,15 @@ const logout = (callback: Function) => {
   callback();
 };
 
+const checkUser = () => {
+  console.log('TODO: checkUser');
+}
+
 const AuthContext = React.createContext({
   getStoredUser,
   handleLogin: (currentUser: ICurrentUser) => {},
   logout,
+  checkUser
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -40,7 +45,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ getStoredUser, handleLogin, logout }}>
+    <AuthContext.Provider value={{ getStoredUser, handleLogin, logout, checkUser }}>
       {children}
     </AuthContext.Provider>
   );
