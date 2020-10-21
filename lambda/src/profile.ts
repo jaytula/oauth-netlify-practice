@@ -6,6 +6,16 @@ import { JWT_PUBLIC_KEY } from "./helpers/jwt-helper";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
+
+  if(typeof event.headers.cookie !== 'string') {
+    return {
+      statusCode: 401,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "no cookie header",
+      }),
+    }
+  }
   const parsedCookie = cookie.parse(event.headers.cookie);
 
   if (!parsedCookie || !parsedCookie.jwt) {
