@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 
+const WEBSITE_URL = process.env.REACT_APP_WEBSITE_URL as string;
+
 interface ICurrentUser {
   userId?: string;
   email?: string;
@@ -15,29 +17,28 @@ const getStoredUser = () =>
 const setStoredUser = (currentUser: ICurrentUser) =>
   window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-
-
-
 const logout = (callback: Function) => {
   setStoredUser({});
   callback();
-};
-
-const checkUser = () => {
-  console.log('TODO: checkUser');
 }
 
 const AuthContext = React.createContext({
   getStoredUser,
   handleLogin: (currentUser: ICurrentUser) => {},
   logout,
-  checkUser
+  checkUser: () => {}
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<ICurrentUser>({userId: '', email: ''})
+
+  const checkUser = async () => {
+    const response = await fetch(`${WEBSITE_URL}/.netlify/functions/profile`);
+    const responseJSON = await response.json();
+    console.log({responseJSON});
+  }
 
   const handleLogin = (currentUser: ICurrentUser) => {
     setUser(currentUser);
