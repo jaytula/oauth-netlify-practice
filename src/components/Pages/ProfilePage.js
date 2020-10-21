@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../services/auth";
 
 const ProfilePage = () => {
@@ -9,9 +9,12 @@ const ProfilePage = () => {
   const userId = urlParams.get("userId");
   const email = urlParams.get("email");
 
-  if(userId && email) {
-    handleLogin({userId, email})
-  }
+  useEffect(() => {
+    if (userId && email) {
+      handleLogin({ userId, email });
+    }
+  }, [userId, email]);
+
 
   return (
     <div>
