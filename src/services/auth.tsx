@@ -17,28 +17,29 @@ const getStoredUser = () =>
 const setStoredUser = (currentUser: ICurrentUser) =>
   window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-const logout = (callback: Function) => {
-  setStoredUser({});
-  callback();
-}
-
 const AuthContext = React.createContext({
   getStoredUser,
   handleLogin: (currentUser: ICurrentUser) => {},
-  logout,
-  checkUser: () => {}
+  logout: (callback: Function) => {},
+  checkUser: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<ICurrentUser>({userId: '', email: ''})
+  const [user, setUser] = useState<ICurrentUser>({ userId: "", email: "" });
+
+  const logout = (callback: Function) => {
+    setStoredUser({});
+    callback();
+  };
 
   const checkUser = async () => {
     const response = await fetch(`${WEBSITE_URL}/.netlify/functions/profile`);
-    const responseJSON = await response.json();
-    console.log({responseJSON});
-  }
+    if (response.status !== 200) {
+      logout(() => {});
+    }
+  };
 
   const handleLogin = (currentUser: ICurrentUser) => {
     setUser(currentUser);
@@ -46,7 +47,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ getStoredUser, handleLogin, logout, checkUser }}>
+    <AuthContext.Provider
+      value={{ getStoredUser, handleLogin, logout, checkUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
