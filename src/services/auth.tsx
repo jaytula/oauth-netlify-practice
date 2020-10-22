@@ -37,6 +37,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const checkUser = async () => {
     const response = await fetch(`${WEBSITE_URL}/.netlify/functions/profile`);
     if (response.status !== 200) {
+      // TODO: How to setUser without causing infinite loop
       logout(() => {});
     }
   };
