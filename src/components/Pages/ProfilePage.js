@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useAuth } from "../../services/auth";
 
 const ProfilePage = () => {
-  const { getStoredUser: getUser, handleLogin } = useAuth();
+  const { getStoredUser, handleLogin } = useAuth();
 
-  const user = getUser();
+  const user = getStoredUser();
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("userId");
   const email = urlParams.get("email");
