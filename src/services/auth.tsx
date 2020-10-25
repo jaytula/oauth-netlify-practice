@@ -33,17 +33,19 @@ const AuthContext = React.createContext<ContextProps>({
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<ICurrentUser>({ userId: "", email: "" });
+  const [user, setUser] = useState<ICurrentUser>(getStoredUser());
 
   const logout = (callback: Function) => {
     setStoredUser({});
+    if(user.email || user.userId) {
+      setUser({})
+    }
     callback();
   };
 
   const checkUser = async () => {
     const response = await fetch(`${WEBSITE_URL}/.netlify/functions/profile`);
     if (response.status !== 200) {
-      // TODO: How to setUser without causing infinite loop
       logout(() => {});
     }
   };
