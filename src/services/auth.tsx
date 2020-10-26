@@ -36,6 +36,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<ICurrentUser>(getStoredUser());
 
   const logout = (callback: Function) => {
+    // TODO: clear the jwt cookie
     setStoredUser({});
     if(user.email || user.userId) {
       setUser({})
