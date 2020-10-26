@@ -4,8 +4,12 @@ import { useAuth } from "../../services/auth";
 import classes from './Toolbar.module.css';
 
 const Toolbar: React.FC = ({ children }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
+  const onLogout = () => {
+    logout(() => {});
+  }
+  
   return (
     <div className={classes.Toolbar}>
       <div>
@@ -15,6 +19,7 @@ const Toolbar: React.FC = ({ children }) => {
       </div>
       <div>
         {JSON.stringify(user, null, 2)}
+        <button onClick={onLogout}>Logout</button>
       </div>
     </div>
   );
