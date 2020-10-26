@@ -10,7 +10,6 @@ import {
   sortByRepo,
   matchText
 } from '../../../utils/sort'
-import ForkMe from '../../ForkMe'
 import loginButton from '../../../assets/netlify-login-button.svg'
 import './NetlifyApp.css'
 
@@ -229,7 +228,6 @@ class NetlifyApp extends Component {
     if (user && !user.token) {
       return (
         <div className='app'>
-          <ForkMe url='https://github.com/netlify-labs/oauth-example' />
           <h1>Netlify Site Search</h1>
           <button onClick={this.handleAuth} >
             <img alt='login to netlify' className='login-button' src={loginButton} />
@@ -241,7 +239,6 @@ class NetlifyApp extends Component {
     /* Show admin UI */
     return (
       <div className='app'>
-        <ForkMe url='https://github.com/netlify-labs/oauth-example' />
         <h1>
           <span className='title-inner'>
             Hi {user.full_name || 'Friend'}
