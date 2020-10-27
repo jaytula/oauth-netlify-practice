@@ -1,13 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
 import classes from './Toolbar.module.css';
 
 const Toolbar: React.FC = ({ children }) => {
   const { user, logout } = useAuth();
+  const history = useHistory();
 
   const onLogout = () => {
-    logout(() => {});
+    logout(() => {
+      history.replace('/');
+    });
   }
   
   return (
