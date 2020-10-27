@@ -23,3 +23,7 @@ export const createJwtCookie = (email: string, userId: string) => {
     path: "/",
   });
 };
+
+export const clearCookie = () => {
+  return "jwt=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+};
