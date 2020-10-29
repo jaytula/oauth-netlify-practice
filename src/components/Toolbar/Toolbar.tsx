@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
-import classes from './Toolbar.module.css';
+import classes from "./Toolbar.module.css";
 
 const Toolbar: React.FC = ({ children }) => {
   const { user, logout } = useAuth();
@@ -9,10 +9,10 @@ const Toolbar: React.FC = ({ children }) => {
 
   const onLogout = () => {
     logout(() => {
-      history.replace('/');
+      history.replace("/");
     });
-  }
-  
+  };
+
   return (
     <div className={classes.Toolbar}>
       <div>
@@ -22,7 +22,7 @@ const Toolbar: React.FC = ({ children }) => {
       </div>
       <div>
         {JSON.stringify(user, null, 2)}
-        <button onClick={onLogout}>Logout</button>
+        {user.email ? <button onClick={onLogout}>Logout</button> : null}
       </div>
     </div>
   );
