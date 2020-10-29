@@ -35,12 +35,13 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<ICurrentUser>(getStoredUser());
 
-  const logout = (callback: Function) => {
+  const logout = async (callback: Function) => {
     // TODO: clear the jwt cookie
     setStoredUser({});
     if(user.email || user.userId) {
       setUser({})
     }
+    await fetch(`${WEBSITE_URL}/.netlify/functions/logout`);
     callback();
   };
 
