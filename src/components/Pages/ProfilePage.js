@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Redirect } from "react-router";
 import { useAuth } from "../../services/auth";
 
 const ProfilePage = () => {
@@ -7,13 +8,18 @@ const ProfilePage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("userId");
   const email = urlParams.get("email");
+  const iat = urlParams.get("iat");
+  const exp = urlParams.get("exp");
 
   useEffect(() => {
     if (userId && email) {
-      handleLogin({ userId, email });
+      handleLogin({ userId, email, iat, exp });
     }
   }, [userId, email]);
 
+  if(userId === user.userId) {
+    return <Redirect to="/profile" />
+  }
 
   return (
     <div>

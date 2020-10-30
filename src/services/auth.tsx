@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 
 const WEBSITE_URL = process.env.REACT_APP_WEBSITE_URL as string;
 
-interface ICurrentUser {
+export interface ICurrentUser {
   userId?: string;
   email?: string;
+  iat?: number;
+  exp?: number;
 }
 
 const isBrowser = () => typeof window !== "undefined";

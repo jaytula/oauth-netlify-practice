@@ -2,9 +2,10 @@ import querystring from "querystring";
 import { authorizationCodeClient, REDIRECT_URL } from "./utils/netlify-auth";
 import { getUser } from "./utils/netlify-api";
 import { APIGatewayEvent } from "aws-lambda";
-import { createJwtCookie } from "./helpers/jwt-helper";
+import { createJwtCookieFromPayload, createJwtPayload, JWT_PUBLIC_KEY } from "./helpers/jwt-helper";
 import { connectToDatabase } from "./helpers/db-helper";
 import { User } from "./models/User";
+import jwt from 'jsonwebtoken';
 
 /* Function to handle netlify auth callback */
 export const handler = async (event: APIGatewayEvent) => {
@@ -32,7 +33,8 @@ export const handler = async (event: APIGatewayEvent) => {
 
     const user = await getUser(authorizationToken.token.access_token);
 
-    const jwtCookie = createJwtCookie(user.email, user.id);
+    const jwtPayload = createJwtPayload(user.email, user.id);
+    const jwtCookie = createJwtCookieFromPayload(jwtPayload);
 
     await connectToDatabase();
 
@@ -50,11 +52,14 @@ export const handler = async (event: APIGatewayEvent) => {
       throw new Error('existingUser should not be null');
     }
 
-    console.log({existingUser});
+    const payload: any = jwt.verify(jwtPayload, JWT_PUBLIC_KEY);
 
     const searchParams = new URLSearchParams();
     searchParams.append('userId', existingUser._id);
     searchParams.append('email', existingUser.email);
+    searchParams.append('iat', payload.iat);
+    searchParams.append('exp', payload.exp);
+
 
     return {
       statusCode: 302,
