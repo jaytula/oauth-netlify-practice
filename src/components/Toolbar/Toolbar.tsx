@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
 import classes from "./Toolbar.module.css";
@@ -21,8 +21,11 @@ const Toolbar: React.FC = ({ children }) => {
         <Link to="/profile">Profile</Link>
       </div>
       <div>
-        {JSON.stringify(user, null, 2)}
-        {user.email ? <button onClick={onLogout}>Logout</button> : null}
+
+        {user.email ? <div>
+          {user.email} | { user.userId } | { new Date(Number(user.iat)*1000).toString() } | { new Date(Number(user.exp)*1000).toString() } | 
+          <button onClick={onLogout}>Logout</button>
+        </div> : null}
       </div>
     </div>
   );
