@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
 import classes from "./Toolbar.module.css";
