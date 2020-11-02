@@ -1,5 +1,6 @@
 import React from "react";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
+
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
 import classes from "./Toolbar.module.css";
@@ -14,6 +15,10 @@ const Toolbar: React.FC = ({ children }) => {
     });
   };
 
+  const iat = dayjs.unix(Number(user.iat)); 
+  const exp = dayjs.unix(Number(user.exp));
+  const now = dayjs();
+
   return (
     <div className={classes.Toolbar}>
       <div>
@@ -25,8 +30,8 @@ const Toolbar: React.FC = ({ children }) => {
         {user.email ? (
           <div>
             {user.email} | {user.userId} |{" "}
-            {dayjs.unix(Number(user.iat)).format("YYYY-MM-DDTHH:mm:ssZZ")} |{" "}
-            {dayjs.unix(Number(user.exp)).format("YYYY-MM-DDTHH:mm:ssZZ")} |{" "}
+            {iat.format("YYYY-MM-DDTHH:mm:ssZZ")} |{" "}
+            {exp.diff(now, 'second')} |{" "}
             <button onClick={onLogout}>Logout</button>
           </div>
         ) : null}
