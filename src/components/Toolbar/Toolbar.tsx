@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../services/auth";
 import classes from "./Toolbar.module.css";
+import { useInterval } from "../../utils/helpers";
+
+
 
 const Toolbar: React.FC = ({ children }) => {
   const { user, logout } = useAuth();
+  const [timeLeft, setTimeLeft] = useState(0);
   const history = useHistory();
 
   const onLogout = () => {
@@ -17,7 +21,12 @@ const Toolbar: React.FC = ({ children }) => {
 
   const iat = dayjs.unix(Number(user.iat)); 
   const exp = dayjs.unix(Number(user.exp));
-  const now = dayjs();
+
+  useInterval(() => {
+    const exp = dayjs.unix(Number(user.exp));
+
+    setTimeLeft(exp.diff(dayjs(), 'second'));
+  }, 1000)
 
   return (
     <div className={classes.Toolbar}>
@@ -31,7 +40,7 @@ const Toolbar: React.FC = ({ children }) => {
           <div>
             {user.email} | {user.userId} |{" "}
             {iat.format("YYYY-MM-DDTHH:mm:ssZZ")} |{" "}
-            {exp.diff(now, 'second')} |{" "}
+            {timeLeft} |{" "}
             <button onClick={onLogout}>Logout</button>
           </div>
         ) : null}
