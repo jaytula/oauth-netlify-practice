@@ -20,7 +20,6 @@ const Toolbar: React.FC = ({ children }) => {
   };
 
   const iat = dayjs.unix(Number(user.iat)); 
-  const exp = dayjs.unix(Number(user.exp));
 
   useInterval(() => {
     const exp = dayjs.unix(Number(user.exp));
