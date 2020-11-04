@@ -12,11 +12,10 @@ const JWT_SECRET_KEY = Buffer.from(
 ).toString("ascii");
 
 export const createJwtPayload = (email: string, userId: string) => {
-  const payload = jwt.sign({ email, userId }, JWT_SECRET_KEY, {
+  return jwt.sign({ email, userId }, JWT_SECRET_KEY, {
     algorithm: "RS256",
     expiresIn: "10 seconds",
   });
-  return payload;
 };
 
 export const createJwtCookieFromPayload = (payload: string) => {
