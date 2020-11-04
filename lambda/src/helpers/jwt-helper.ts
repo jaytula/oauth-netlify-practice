@@ -26,6 +26,10 @@ export const createJwtCookieFromPayload = (payload: string) => {
     path: "/",
   });
 };
+
+export const decodeJwtPayload = (payload: string) =>
+  jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ['RS256'] });
+  
 export const createJwtCookie = (email: string, userId: string) => {
   const payload = createJwtPayload(email, userId);
   return createJwtCookieFromPayload(payload);
