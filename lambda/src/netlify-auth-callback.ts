@@ -2,7 +2,7 @@ import querystring from "querystring";
 import { authorizationCodeClient, REDIRECT_URL } from "./utils/netlify-auth";
 import { getUser } from "./utils/netlify-api";
 import { APIGatewayEvent } from "aws-lambda";
-import { createJwtCookieFromPayload, createJwtPayload, JWT_PUBLIC_KEY } from "./helpers/jwt-helper";
+import { createJwtCookieFromPayload, createJwtPayload, decodeJwtPayload, JWT_PUBLIC_KEY } from "./helpers/jwt-helper";
 import { connectToDatabase } from "./helpers/db-helper";
 import { User } from "./models/User";
 import jwt from 'jsonwebtoken';
@@ -52,7 +52,7 @@ export const handler = async (event: APIGatewayEvent) => {
       throw new Error('existingUser should not be null');
     }
 
-    const payload: any = jwt.verify(jwtPayload, JWT_PUBLIC_KEY);
+    const payload = decodeJwtPayload(jwtPayload);
 
     const searchParams = new URLSearchParams();
     searchParams.append('userId', existingUser._id);
