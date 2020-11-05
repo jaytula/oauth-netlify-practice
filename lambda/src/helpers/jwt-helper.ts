@@ -1,6 +1,13 @@
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
+type JwtPayload = {
+  userId: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
+
 export const JWT_PUBLIC_KEY = Buffer.from(
   process.env.JWT_PUBLIC_KEY as string,
   "base64"
@@ -28,7 +35,7 @@ export const createJwtCookieFromPayload = (payload: string) => {
 };
 
 export const decodeJwtPayload = (payload: string) =>
-  jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ['RS256'] });
+  jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ['RS256'] }) as JwtPayload;
   
 export const createJwtCookie = (email: string, userId: string) => {
   const payload = createJwtPayload(email, userId);

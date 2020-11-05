@@ -57,8 +57,8 @@ export const handler = async (event: APIGatewayEvent) => {
     const searchParams = new URLSearchParams();
     searchParams.append('userId', existingUser._id);
     searchParams.append('email', existingUser.email);
-    searchParams.append('iat', payload.iat);
-    searchParams.append('exp', payload.exp);
+    searchParams.append('iat', payload.iat.toString());
+    searchParams.append('exp', payload.exp.toString());
 
 
     return {
