@@ -22,7 +22,14 @@ const Toolbar: React.FC = ({ children }) => {
   useInterval(() => {
     const exp = dayjs.unix(Number(user.exp));
 
-    setTimeLeft(exp.diff(dayjs(), "second"));
+    const updatedTimeLeft = exp.diff(dayjs(), "second");
+
+    setTimeLeft(updatedTimeLeft);
+    if(updatedTimeLeft <= 0) {
+      logout(() => {
+        history.replace("/");
+      })
+    }
   }, 1000);
 
   return (
