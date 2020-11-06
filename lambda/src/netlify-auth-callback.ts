@@ -6,6 +6,45 @@ import { createJwtCookieFromPayload, createJwtPayload, decodeJwtPayload } from "
 import { connectToDatabase } from "./helpers/db-helper";
 import { User } from "./models/User";
 
+const authWithEmail = async (email: string) => {
+  await connectToDatabase();
+
+  let existingUser = await User.findOne({ email });
+
+  if (!existingUser) {
+    const newUser = User.build({
+      email,
+    });
+
+    existingUser = await newUser.save();
+  }
+
+  if(!existingUser) {
+    throw new Error('existingUser should not be null');
+  }
+  
+  const jwtPayload = createJwtPayload(email, existingUser._id);
+  const jwtCookie = createJwtCookieFromPayload(jwtPayload);
+
+  const payload = decodeJwtPayload(jwtPayload);
+
+  const searchParams = new URLSearchParams();
+  searchParams.append('userId', existingUser._id);
+  searchParams.append('email', existingUser.email);
+  searchParams.append('iat', payload.iat.toString());
+  searchParams.append('exp', payload.exp.toString());
+
+  return {
+    statusCode: 302,
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": jwtCookie,
+      "Location": `/profile?${searchParams.toString()}`
+    },
+    body: JSON.stringify({ existingUser, jwtCookie }, null, 2),
+  };
+}
+
 /* Function to handle netlify auth callback */
 export const handler = async (event: APIGatewayEvent) => {
   // Exit early
@@ -32,43 +71,7 @@ export const handler = async (event: APIGatewayEvent) => {
 
     const user = await getUser(authorizationToken.token.access_token);
 
-    const jwtPayload = createJwtPayload(user.email, user.id);
-    const jwtCookie = createJwtCookieFromPayload(jwtPayload);
-
-    await connectToDatabase();
-
-    let existingUser = await User.findOne({ email: user.email });
-
-    if (!existingUser) {
-      const newUser = User.build({
-        email: user.email,
-      });
-
-      existingUser = await newUser.save();
-    }
-
-    if(!existingUser) {
-      throw new Error('existingUser should not be null');
-    }
-
-    const payload = decodeJwtPayload(jwtPayload);
-
-    const searchParams = new URLSearchParams();
-    searchParams.append('userId', existingUser._id);
-    searchParams.append('email', existingUser.email);
-    searchParams.append('iat', payload.iat.toString());
-    searchParams.append('exp', payload.exp.toString());
-
-
-    return {
-      statusCode: 302,
-      headers: {
-        "Content-Type": "application/json",
-        "Set-Cookie": jwtCookie,
-        "Location": `/profile?${searchParams.toString()}`
-      },
-      body: JSON.stringify({ existingUser, jwtCookie }, null, 2),
-    };
+    return authWithEmail(user.email);
   } catch (e) {
     return {
       statusCode: e.statusCode || 500,
