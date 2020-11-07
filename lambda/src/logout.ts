@@ -1,5 +1,5 @@
 import { APIGatewayEvent } from "aws-lambda";
-import { clearCookie } from "./helpers/jwt-helper";
+import { clearCookie } from "./helpers/jwt-helpers";
 
 export const handler = async (event: APIGatewayEvent) => {
   return {
