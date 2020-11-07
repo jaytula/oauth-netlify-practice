@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { connectToDatabase } from "./db-helper";
+import { connectToDatabase } from "./db-helpers";
 import { createJwtPayload, createJwtCookieFromPayload, decodeJwtPayload } from "./jwt-helper";
 
 export const authWithEmail = async (email: string) => {
