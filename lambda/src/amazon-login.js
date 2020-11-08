@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { authWithEmail } = require("./helpers/auth-helpers");
 
 exports.handler = async (event, context) => {
   const { queryStringParameters } = event;
@@ -30,8 +31,5 @@ exports.handler = async (event, context) => {
 
   console.log(userProfile.data);
 
-  return {
-    statusCode: 200,
-    body: "abc",
-  };
+  return authWithEmail(userProfile.data.email)
 };
