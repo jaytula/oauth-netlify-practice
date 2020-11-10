@@ -1,12 +1,7 @@
 import { APIGatewayEvent } from "aws-lambda";
 import cookie from "cookie";
 import { authWithEmail } from "./helpers/auth-helpers";
-import {
-  createJwtCookieFromPayload,
-  createJwtPayload,
-  decodeJwtPayload,
-} from "./helpers/jwt-helpers";
-import { User } from "./models/User";
+import { decodeJwtPayload } from "./helpers/jwt-helpers";
 
 export const handler = async (event: APIGatewayEvent) => {
   if (typeof event.headers.cookie !== "string") {
@@ -31,18 +26,7 @@ export const handler = async (event: APIGatewayEvent) => {
   }
 
   try {
-    const { email } = decodeJwtPayload(req.cookies.jwt);
-    const existingUser = await User.findOne({ email });
-
-    if (!existingUser) {
-      return {
-        statusCode: 401,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: `Invalid email: ${email}`,
-        }),
-      };
-    }
+    const { email } = decodeJwtPayload(parsedCookie.jwt);
 
     return authWithEmail(email);
   } catch (err) {
