@@ -21,7 +21,7 @@ const JWT_SECRET_KEY = Buffer.from(
 export const createJwtPayload = (email: string, userId: string) => {
   return jwt.sign({ email, userId }, JWT_SECRET_KEY, {
     algorithm: "RS256",
-    expiresIn: "10 seconds",
+    expiresIn: "5 minutes",
   });
 };
 
