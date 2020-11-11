@@ -5,7 +5,7 @@ import Layout from "./components/Layout/Layout";
 import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
 import NetlifyApp from "./components/Pages/NetlfiyApp/NetlifyApp";
 import ProfilePage from "./components/Pages/ProfilePage";
-import { AuthProvider, useAuth } from "./services/auth";
+import { AuthProvider, useAuth } from "./services/auth-provider";
 
 const AppRouter = () => {
   const { checkUser } = useAuth();

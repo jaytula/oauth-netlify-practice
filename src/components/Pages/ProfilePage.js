@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router";
-import { useAuth } from "../../services/auth";
+import { useAuth } from "../../services/auth-provider";
 
 const ProfilePage = () => {
   const { user, handleLogin } = useAuth();

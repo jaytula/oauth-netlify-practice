@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import dayjs from "dayjs";
 
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../services/auth";
+import { useAuth } from "../../services/auth-provider";
 import classes from "./Toolbar.module.css";
 import { useInterval } from "../../utils/helpers";
 
