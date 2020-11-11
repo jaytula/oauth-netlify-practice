@@ -23,12 +23,14 @@ interface ContextProps {
   user: ICurrentUser,
   handleLogin: (currentUser: ICurrentUser) => void,
   logout: (callback: Function) => void,
+  refresh: () => void,
   checkUser: () => void
 }
 const AuthContext = React.createContext<ContextProps>({
   user: {userId: '', email: ''},
   handleLogin: (currentUser: ICurrentUser) => {},
   logout: (callback: Function) => {},
+  refresh: () => {},
   checkUser: () => {},
 });
 
@@ -59,9 +61,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     return setStoredUser(currentUser);
   };
 
+  const refresh = () => {
+    console.log('TODO: refresh')
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, handleLogin, logout, checkUser }}
+      value={{ user, handleLogin, logout, checkUser, refresh }}
     >
       {children}
     </AuthContext.Provider>
