@@ -7,7 +7,7 @@ import classes from "./Toolbar.module.css";
 import { useInterval } from "../../utils/helpers";
 
 const Toolbar: React.FC = ({ children }) => {
-  const { user, logout } = useAuth();
+  const { user, logout, refresh } = useAuth();
   const [timeLeft, setTimeLeft] = useState(0);
   const history = useHistory();
 
@@ -15,6 +15,10 @@ const Toolbar: React.FC = ({ children }) => {
     logout(() => {
       history.replace("/");
     });
+  };
+
+  const onRefresh = () => {
+    refresh();
   };
 
   const iat = dayjs.unix(Number(user.iat));
@@ -25,10 +29,10 @@ const Toolbar: React.FC = ({ children }) => {
     const updatedTimeLeft = exp.diff(dayjs(), "second");
 
     setTimeLeft(updatedTimeLeft);
-    if(updatedTimeLeft <= 0) {
+    if (updatedTimeLeft <= 0) {
       logout(() => {
         history.replace("/");
-      })
+      });
     }
   }, 1000);
 
@@ -47,7 +51,8 @@ const Toolbar: React.FC = ({ children }) => {
         {user.email ? (
           <div>
             {user.email} | {user.userId} | {iat.format("YYYY-MM-DDTHH:mm:ssZZ")}{" "}
-            | {timeLeft} | <button onClick={onLogout}>Logout</button>
+            | {timeLeft} | <button onClick={onRefresh}>Refresh</button> |{" "}
+            <button onClick={onLogout}>Logout</button>
           </div>
         ) : null}
       </div>
