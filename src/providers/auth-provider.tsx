@@ -3,10 +3,10 @@ import React, { useContext, useState } from "react";
 const WEBSITE_URL = process.env.REACT_APP_WEBSITE_URL as string;
 
 export interface ICurrentUser {
-  userId?: string;
-  email?: string;
-  iat?: number;
-  exp?: number;
+  userId: string;
+  email: string;
+  iat: number;
+  exp: number;
 }
 
 const isBrowser = () => typeof window !== "undefined";
@@ -26,8 +26,11 @@ interface ContextProps {
   refresh: () => void,
   checkUser: () => void
 }
+
+const emptyUser = {userId: '', email: '', iat: 0, exp: 0};
+
 const AuthContext = React.createContext<ContextProps>({
-  user: {userId: '', email: ''},
+  user: emptyUser,
   handleLogin: (currentUser: ICurrentUser) => {},
   logout: (callback: Function) => {},
   refresh: () => {},
@@ -41,9 +44,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const logout = async (callback: Function) => {
     // TODO: clear the jwt cookie
-    setStoredUser({});
+    setStoredUser(emptyUser);
     if(user.email || user.userId) {
-      setUser({})
+      setUser(emptyUser)
     }
     await fetch(`${WEBSITE_URL}/.netlify/functions/logout`);
     callback();
