@@ -5,6 +5,7 @@ import Layout from "./components/Layout/Layout";
 import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
 import NetlifyApp from "./components/Pages/NetlfiyApp/NetlifyApp";
 import ProfilePage from "./components/Pages/ProfilePage";
+import RefreshModal from "./components/RefreshModal/RefreshModal";
 import { AuthProvider, useAuth } from "./providers/auth-provider";
 
 const AppRouter = () => {
@@ -15,6 +16,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Layout>
+        <RefreshModal />
         <div className={classes.App}>
           <h1>OAuth Practice App</h1>
           <Route path="/lwa" component={LoginWithAmazon} />
