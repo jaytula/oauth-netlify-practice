@@ -29,7 +29,7 @@ const Toolbar: React.FC = ({ children }) => {
     const updatedTimeLeft = exp.diff(dayjs(), "second");
 
     setTimeLeft(updatedTimeLeft);
-    if (updatedTimeLeft <= 0) {
+    if (updatedTimeLeft <= 0 && user.email) {
       logout(() => {
         history.replace("/");
       });

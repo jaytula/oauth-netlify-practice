@@ -47,8 +47,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     setStoredUser(emptyUser);
     if(user.email || user.userId) {
       setUser(emptyUser)
+      await fetch(`${WEBSITE_URL}/.netlify/functions/logout`);
     }
-    await fetch(`${WEBSITE_URL}/.netlify/functions/logout`);
     callback();
   };
 
