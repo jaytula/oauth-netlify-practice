@@ -18,7 +18,7 @@ const RefreshModal = () => {
     refresh();
   };
 
-  return user.email && secondsLeft >= 1 && secondsLeft <= 570 ? (
+  return user.email && secondsLeft >= 1 && secondsLeft <= 90 ? (
     <div className={classes.RefreshModal}>
       <div className={classes.RefreshModalContent}>
         You will be logged out in: {secondsLeft} seconds
