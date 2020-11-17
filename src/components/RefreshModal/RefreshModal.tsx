@@ -1,19 +1,30 @@
-import dayjs from 'dayjs';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
-import { useAuth } from '../../providers/auth-provider';
-import { useInterval } from '../../utils/helpers';
-import classes from './RefreshModal.module.css';
+import dayjs from "dayjs";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { useAuth } from "../../providers/auth-provider";
+import { useInterval } from "../../utils/helpers";
+import classes from "./RefreshModal.module.css";
 
-const RefreshModal = () => {
+interface RefreshModalProps {
+  enabled: boolean;
+  exp: number;
+  refresh: Function;
+  logout: Function;
+}
+
+const RefreshModal: React.FC<RefreshModalProps> = ({
+  enabled,
+  exp,
+  refresh,
+  logout,
+}) => {
   const [secondsLeft, setSecondsLeft] = useState(0);
-  const { user, refresh, logout } = useAuth();
   const history = useHistory();
 
   useInterval(() => {
-    const exp = dayjs.unix(user.exp);
-    const updatedSecondsLeft = exp.diff(dayjs(), 'second');
-    
+    const expDate = dayjs.unix(exp);
+    const updatedSecondsLeft = expDate.diff(dayjs(), "second");
+
     setSecondsLeft(updatedSecondsLeft);
   }, 1000);
 
@@ -24,10 +35,10 @@ const RefreshModal = () => {
   const onLogout = () => {
     logout(() => {
       history.replace("/");
-    })
-  }
+    });
+  };
 
-  return user.email && secondsLeft >= 1 && secondsLeft <= 90 ? (
+  return enabled && secondsLeft >= 1 && secondsLeft <= 90 ? (
     <div className={classes.RefreshModal}>
       <div className={classes.RefreshModalContent}>
         You will be logged out in: {secondsLeft} seconds

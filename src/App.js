@@ -9,14 +9,19 @@ import RefreshModal from "./components/RefreshModal/RefreshModal";
 import { AuthProvider, useAuth } from "./providers/auth-provider";
 
 const AppRouter = () => {
-  const { checkUser } = useAuth();
+  const { checkUser, user, logout, refresh } = useAuth();
 
   checkUser();
 
   return (
     <BrowserRouter>
       <Layout>
-        <RefreshModal />
+        <RefreshModal
+          enabled={!!user.email}
+          exp={user.exp}
+          logout={logout}
+          refresh={refresh}
+        />
         <div className={classes.App}>
           <h1>OAuth Practice App</h1>
           <Route path="/lwa" component={LoginWithAmazon} />
