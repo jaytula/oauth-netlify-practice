@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/auth-provider";
 import classes from "./Toolbar.module.css";
-import { useInterval } from "../../utils/helpers";
+import { useInterval } from '@groundearth0/auth-utils';
 
 const Toolbar: React.FC = ({ children }) => {
   const { user, logout, refresh } = useAuth();

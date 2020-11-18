@@ -1,7 +1,7 @@
+import { useInterval } from "@groundearth0/auth-utils";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useInterval } from "../../utils/helpers";
 import classes from "./RefreshModal.module.css";
 
 interface RefreshModalProps {

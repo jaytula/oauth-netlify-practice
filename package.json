@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/plugin-transform-object-assign": "^7.10.4",
     "@babel/runtime": "^7.11.2",
+    "@groundearth0/auth-utils": "^1.0.0",
     "aws-sdk": "^2.734.0",
     "axios": "^0.20.0",
     "cookie": "^0.4.1",
