@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../../providers/auth-provider";
 import { useInterval } from "../../utils/helpers";
 import classes from "./RefreshModal.module.css";
 
