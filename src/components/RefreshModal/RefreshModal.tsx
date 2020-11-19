@@ -7,7 +7,7 @@ import classes from "./RefreshModal.module.css";
 interface RefreshModalProps {
   enabled: boolean;
   exp: number;
-  refresh: Function;
+  refresh: () => {};
   logout: Function;
 }
 
@@ -27,10 +27,6 @@ const RefreshModal: React.FC<RefreshModalProps> = ({
     setSecondsLeft(updatedSecondsLeft);
   }, 1000);
 
-  const onRefresh = () => {
-    refresh();
-  };
-
   const onLogout = () => {
     logout(() => {
       history.replace("/");
@@ -41,7 +37,7 @@ const RefreshModal: React.FC<RefreshModalProps> = ({
     <div className={classes.RefreshModal}>
       <div className={classes.RefreshModalContent}>
         You will be logged out in: {secondsLeft} seconds
-        <button onClick={onRefresh}>Refresh</button>
+        <button onClick={refresh}>Refresh</button>
         <button onClick={onLogout}>Logout</button>
       </div>
     </div>
