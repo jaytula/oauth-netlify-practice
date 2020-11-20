@@ -1,14 +1,15 @@
-import { useInterval } from "@groundearth0/auth-utils";
-import dayjs from "dayjs";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import dayjs from "dayjs";
+import { useHistory } from "react-router-dom";
+import { useInterval } from "@groundearth0/auth-utils";
 import classes from "./RefreshModal.module.css";
 
 interface RefreshModalProps {
   enabled: boolean;
   exp: number;
-  refresh: () => {};
+  refresh: () => void;
   logout: Function;
+  secondsRemaining?: number;
 }
 
 const RefreshModal: React.FC<RefreshModalProps> = ({
@@ -16,6 +17,7 @@ const RefreshModal: React.FC<RefreshModalProps> = ({
   exp,
   refresh,
   logout,
+  secondsRemaining = 90,
 }) => {
   const [secondsLeft, setSecondsLeft] = useState(0);
   const history = useHistory();
@@ -23,7 +25,6 @@ const RefreshModal: React.FC<RefreshModalProps> = ({
   useInterval(() => {
     const expDate = dayjs.unix(exp);
     const updatedSecondsLeft = expDate.diff(dayjs(), "second");
-
     setSecondsLeft(updatedSecondsLeft);
   }, 1000);
 
@@ -33,7 +34,7 @@ const RefreshModal: React.FC<RefreshModalProps> = ({
     });
   };
 
-  return enabled && secondsLeft >= 1 && secondsLeft <= 90 ? (
+  return enabled && secondsLeft >= 1 && secondsLeft <= secondsRemaining ? (
     <div className={classes.RefreshModal}>
       <div className={classes.RefreshModalContent}>
         You will be logged out in: {secondsLeft} seconds
