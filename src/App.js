@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, useHistory } from "react-router-dom";
 import classes from "./App.module.css";
 import Layout from "./components/Layout/Layout";
 import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
@@ -10,7 +10,13 @@ import { AuthProvider, useAuth } from "./providers/auth-provider";
 
 const AppRouter = () => {
   const { checkUser, user, logout, refresh } = useAuth();
+  const history = useHistory();
 
+  const onLogout = () => {
+    logout(() => {
+      history.replace("/");
+    });
+  };
   checkUser();
 
   return (
@@ -19,7 +25,7 @@ const AppRouter = () => {
         <RefreshModal
           enabled={!!user.email}
           exp={user.exp}
-          logout={logout}
+          onLogout={onLogout}
           refresh={refresh}
         />
         <div className={classes.App}>
