@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/plugin-transform-object-assign": "^7.12.1",
     "@babel/runtime": "^7.12.5",
-    "@groundearth0/auth-utils": "^1.0.0",
+    "@groundearth0/auth-utils": "file:local-packages/groundearth0-auth-utils-1.0.0.tgz",
     "aws-sdk": "^2.797.0",
     "axios": "^0.20.0",
     "cookie": "^0.4.1",
@@ -29,6 +29,7 @@
     "build": "npm-run-all --parallel build:**",
     "build:app": "react-scripts build",
     "build:lambda": "tsc -p ./lambda",
+    "auth-utils:install": "mkdir -p local-packages && cd local-packages && npm pack ../../auth-utils && cd .. && npm install $(ls ./local-packages/*.tgz) && rm ./local-packages/*",
     "dev": "export $(cat .env | xargs) && concurrently \"docker-compose up\" \"npm run build:lambda && netlify dev\" \"tsc -p ./lambda -w\" \"lt -h ${LOCALTUNNEL_HOST} -p 8888 -s barstool\"",
     "deploy": "npm run build && netlify deploy -p",
     "local": "export $(cat .env | xargs) && concurrently \"netlify dev\" \"lt -h ${LOCALTUNNEL_HOST} -p 8888 -s barstool\""
