@@ -6,6 +6,7 @@ import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
 import NetlifyApp from "./components/Pages/NetlfiyApp/NetlifyApp";
 import ProfilePage from "./components/Pages/ProfilePage";
 import { RefreshModal } from "@groundearth0/auth-utils";
+import '@groundearth0/auth-utils/dist/index.css';
 import { AuthProvider, useAuth } from "./providers/auth-provider";
 
 const AppRouter = () => {
@@ -27,6 +28,7 @@ const AppRouter = () => {
           exp={user.exp}
           onLogout={onLogout}
           refresh={refresh}
+          secondsRemaining={115}
         />
         <div className={classes.App}>
           <h1>OAuth Practice App</h1>
