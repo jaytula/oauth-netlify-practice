@@ -20,14 +20,14 @@ const setStoredUser = (currentUser: ICurrentUser) =>
   window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
 interface ContextProps {
-  user: ICurrentUser,
-  handleLogin: (currentUser: ICurrentUser) => void,
-  logout: (callback: Function) => void,
-  refresh: () => void,
-  checkUser: () => void
+  user: ICurrentUser;
+  handleLogin: (currentUser: ICurrentUser) => void;
+  logout: (callback: Function) => void;
+  refresh: () => void;
+  checkUser: () => void;
 }
 
-const emptyUser = {userId: '', email: '', iat: 0, exp: 0};
+const emptyUser = { userId: "", email: "", iat: 0, exp: 0 };
 
 const AuthContext = React.createContext<ContextProps>({
   user: emptyUser,
@@ -45,8 +45,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   const logout = async (callback: Function) => {
     // TODO: clear the jwt cookie
     setStoredUser(emptyUser);
-    if(user.email || user.userId) {
-      setUser(emptyUser)
+    if (user.email || user.userId) {
+      setUser(emptyUser);
       await fetch(`${WEBSITE_URL}/.netlify/functions/logout`);
     }
     callback();
@@ -65,8 +65,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const refresh = () => {
-    console.log('TODO: refresh')
-  }
+    fetch("/.netlify/functions/refresh-session")
+  };
 
   return (
     <AuthContext.Provider
