@@ -28,7 +28,13 @@ export const handler = async (event: APIGatewayEvent) => {
   try {
     const { email } = decodeJwtPayload(parsedCookie.jwt);
 
-    return authWithEmail(email);
+    const response =  await authWithEmail(email);
+
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({response, email})
+    }
   } catch (err) {
     return {
       statusCode: 401,
