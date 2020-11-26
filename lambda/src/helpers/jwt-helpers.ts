@@ -18,7 +18,7 @@ const JWT_SECRET_KEY = Buffer.from(
   "base64"
 ).toString("ascii");
 
-export const createJwtPayload = (email: string, userId: string) => {
+export const createJwtPayload = (userId: string, email: string) => {
   return jwt.sign({ email, userId }, JWT_SECRET_KEY, {
     algorithm: "RS256",
     expiresIn: "2 minutes",
@@ -38,7 +38,7 @@ export const decodeJwtPayload = (payload: string) =>
   jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ['RS256'] }) as JwtPayload;
   
 export const createJwtCookie = (email: string, userId: string) => {
-  const payload = createJwtPayload(email, userId);
+  const payload = createJwtPayload(userId, email);
   return createJwtCookieFromPayload(payload);
 };
 

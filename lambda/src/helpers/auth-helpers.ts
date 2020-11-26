@@ -19,7 +19,7 @@ export const authWithEmail = async (email: string) => {
     throw new Error('existingUser should not be null');
   }
   
-  const jwtPayload = createJwtPayload(email, existingUser._id);
+  const jwtPayload = createJwtPayload(existingUser._id, email);
   const jwtCookie = createJwtCookieFromPayload(jwtPayload);
 
   const payload = decodeJwtPayload(jwtPayload);
