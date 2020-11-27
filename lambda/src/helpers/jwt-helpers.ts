@@ -1,12 +1,21 @@
-import cookie from "cookie";
 import jwt from "jsonwebtoken";
+import cookie from "cookie";
+
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN as string;
+const JWT_SAMESITE =
+  (process.env.JWT_SAMESITE as
+    | boolean
+    | "strict"
+    | "none"
+    | "lax"
+    | undefined) || "strict";
 
 type JwtPayload = {
   userId: string;
   email: string;
   iat: number;
   exp: number;
-}
+};
 
 export const JWT_PUBLIC_KEY = Buffer.from(
   process.env.JWT_PUBLIC_KEY as string,
@@ -19,9 +28,9 @@ const JWT_SECRET_KEY = Buffer.from(
 ).toString("ascii");
 
 export const createJwtPayload = (userId: string, email: string) => {
-  return jwt.sign({ email, userId }, JWT_SECRET_KEY, {
+  return jwt.sign({ userId, email }, JWT_SECRET_KEY, {
     algorithm: "RS256",
-    expiresIn: "2 minutes",
+    expiresIn: JWT_EXPIRES_IN || "300 sec",
   });
 };
 
@@ -29,14 +38,14 @@ export const createJwtCookieFromPayload = (payload: string) => {
   return cookie.serialize("jwt", payload, {
     secure: true,
     httpOnly: true,
-    sameSite: "strict",
     path: "/",
+    sameSite: JWT_SAMESITE,
   });
 };
 
 export const decodeJwtPayload = (payload: string) =>
-  jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ['RS256'] }) as JwtPayload;
-  
+  jwt.verify(payload, JWT_PUBLIC_KEY, { algorithms: ["RS256"] }) as JwtPayload;
+
 export const createJwtCookie = (email: string, userId: string) => {
   const payload = createJwtPayload(userId, email);
   return createJwtCookieFromPayload(payload);
