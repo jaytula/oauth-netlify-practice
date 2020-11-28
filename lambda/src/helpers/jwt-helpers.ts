@@ -9,6 +9,8 @@ const JWT_SAMESITE =
     | "none"
     | "lax"
     | undefined) || "strict";
+const JWT_HTTPONLY = true;
+const JWT_SECURE = true;
 
 type JwtPayload = {
   userId: string;
@@ -22,7 +24,7 @@ export const JWT_PUBLIC_KEY = Buffer.from(
   "base64"
 ).toString("ascii");
 
-const JWT_SECRET_KEY = Buffer.from(
+export const JWT_SECRET_KEY = Buffer.from(
   process.env.JWT_SECRET_KEY as string,
   "base64"
 ).toString("ascii");
@@ -52,5 +54,15 @@ export const createJwtCookie = (email: string, userId: string) => {
 };
 
 export const clearCookie = () => {
-  return "jwt=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-};
+  const cookieParams = [
+    "jwt=deleted",
+    "path=/",
+    "expires=Thu, 01 Jan 1970 00:00:00 GMT"
+  ];
+
+  if(JWT_HTTPONLY) cookieParams.push('HttpOnly');
+  if(JWT_SECURE) cookieParams.push('Secure');
+  if(JWT_SAMESITE) cookieParams.push(`SameSite=${JWT_SECURE}`);
+
+  return cookieParams.join('; ');
+}
