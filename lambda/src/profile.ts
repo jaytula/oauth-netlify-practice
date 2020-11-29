@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
-import { JWT_PUBLIC_KEY } from "./helpers/jwt-helpers";
+import { JWT_PUBLIC_KEY } from "./helpers/jwt-helpers-instance";
 
 export const handler = async (
   event: APIGatewayProxyEvent

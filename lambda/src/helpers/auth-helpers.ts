@@ -1,6 +1,6 @@
 import { User } from "../models/User";
 import { connectToDatabase } from "./db-helpers";
-import { createJwtPayload, createJwtCookieFromPayload, decodeJwtPayload } from "./jwt-helpers";
+import { createJwtPayload, createJwtCookieFromPayload, decodeJwtPayload } from "./jwt-helpers-instance";
 
 export const authWithEmail = async (email: string) => {
   await connectToDatabase();

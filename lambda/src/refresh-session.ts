@@ -1,7 +1,7 @@
 import { APIGatewayEvent } from "aws-lambda";
 import cookie from "cookie";
 import { authWithEmail } from "./helpers/auth-helpers";
-import { decodeJwtPayload } from "./helpers/jwt-helpers";
+import { decodeJwtPayload } from "./helpers/jwt-helpers-instance";
 
 export const handler = async (event: APIGatewayEvent) => {
   if (typeof event.headers.cookie !== "string") {
