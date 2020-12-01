@@ -9,9 +9,9 @@ const userSchema = new Schema({
   password: String
 });
 
-userSchema.statics.build = (attr: IUser) => {
+userSchema.static('build', function(attr: IUser) {
   return new User(attr);
-}
+});
 
 interface IUser {
   name?: string;
