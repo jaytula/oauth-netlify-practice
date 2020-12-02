@@ -20,6 +20,7 @@ interface IUser {
 };
 
 interface UserDoc extends mongoose.Document {
+  _id: string;
   name?: string;
   email: string;
   password?: string;
