@@ -65,7 +65,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const refresh = () => {
-    fetch("/.netlify/functions/refresh-session")
+    fetch("/.netlify/functions/refresh-session").then(res => res.json()).then(data => {
+      console.log({data});
+    })
   };
 
   return (
