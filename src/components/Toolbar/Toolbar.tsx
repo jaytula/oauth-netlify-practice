@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import dayjs from "dayjs";
+import cookie from 'cookie';
 
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/auth-provider";
@@ -18,7 +19,10 @@ const Toolbar: React.FC = ({ children }) => {
   };
 
   const onRefresh = () => {
-    refresh();
+    refresh().then(data => {
+      const parsedCookie = cookie.parse(data.response.headers['Set-Cookie']);
+      console.log(parsedCookie);
+    })
   };
 
   const iat = dayjs.unix(Number(user.iat));
