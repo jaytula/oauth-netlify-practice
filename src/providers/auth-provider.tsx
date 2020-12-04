@@ -23,7 +23,7 @@ interface ContextProps {
   user: ICurrentUser;
   handleLogin: (currentUser: ICurrentUser) => void;
   logout: (callback: Function) => void;
-  refresh: () => void;
+  refresh: () => Promise<any>;
   checkUser: () => void;
 }
 
@@ -33,7 +33,7 @@ const AuthContext = React.createContext<ContextProps>({
   user: emptyUser,
   handleLogin: (currentUser: ICurrentUser) => {},
   logout: (callback: Function) => {},
-  refresh: () => {},
+  refresh: async () => ({}),
   checkUser: () => {},
 });
 
@@ -64,9 +64,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     return setStoredUser(currentUser);
   };
 
-  const refresh = () => {
-    fetch("/.netlify/functions/refresh-session").then(res => res.json()).then(data => {
-      console.log({data});
+  const refresh = async () => {
+    return fetch("/.netlify/functions/refresh-session").then(res => res.json()).then(data => {
+      return data;
     })
   };
 
