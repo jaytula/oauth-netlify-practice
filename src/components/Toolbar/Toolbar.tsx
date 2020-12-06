@@ -20,8 +20,20 @@ const Toolbar: React.FC = ({ children }) => {
 
   const onRefresh = () => {
     refresh().then(data => {
-      const parsedCookie = cookie.parse(data.response.headers['Set-Cookie']);
-      console.log(parsedCookie);
+      console.log(data);
+
+      // Need to redirect to `/profile` which is the ProfilePage component
+      // Needed queryParams are: userId, email, iat, exp
+
+      const urlParams = new URLSearchParams();
+      urlParams.set("userId", data.userId);
+      urlParams.set('email', data.email);
+      urlParams.set("iat", data.iat);
+      urlParams.set("exp", data.exp);
+
+      const qs = urlParams.toString();
+
+      history.push(`/profile?${qs}`)
     })
   };
 
