@@ -26,7 +26,7 @@ export const handler = async (event: APIGatewayEvent) => {
   }
 
   try {
-    const { email } = decodeJwtPayload(parsedCookie.jwt);
+    const { email, userId, exp, iat } = decodeJwtPayload(parsedCookie.jwt);
 
     const response = await authWithEmail(email);
 
@@ -36,7 +36,7 @@ export const handler = async (event: APIGatewayEvent) => {
         "Content-Type": "application/json",
         "Set-Cookie": response.headers["Set-Cookie"],
       },
-      body: JSON.stringify({ response, email }),
+      body: JSON.stringify({ email, userId, exp, iat }),
     };
   } catch (err) {
     return {
