@@ -1,5 +1,3 @@
-import jwt from "jsonwebtoken";
-import cookie from "cookie";
 import JwtHelpers from "./jwt-helpers";
 
 export const JWT_PUBLIC_KEY = Buffer.from(
