@@ -28,7 +28,7 @@ const AppRouter = () => {
           exp={user.exp}
           onLogout={onLogout}
           refresh={refresh}
-          secondsRemaining={115}
+          secondsRemaining={460}
         />
         <div className={classes.App}>
           <h1>OAuth Practice App</h1>
