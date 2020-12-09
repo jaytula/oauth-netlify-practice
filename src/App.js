@@ -9,38 +9,29 @@ import { RefreshModal } from "@groundearth0/auth-utils";
 import "@groundearth0/auth-utils/dist/index.css";
 import { AuthProvider, useAuth } from "./providers/auth-provider";
 
-const AppRouter = () => {
+const AppLayout = () => {
   const { checkUser, user, logout, refresh } = useAuth();
   const history = useHistory();
 
   const onLogout = () => {
     logout(() => {
-      console.log({history})
+      console.log({ history });
       history.replace("/");
     });
   };
   checkUser();
 
-  const onRefreshData = (data) => {
-      console.log(data);
-      console.log('abc');
+  const onRefreshData = data => {
+    const urlParams = new URLSearchParams();
+    urlParams.set("userId", data.userId);
+    urlParams.set("email", data.email);
+    urlParams.set("iat", data.iat);
+    urlParams.set("exp", data.exp);
 
-      // Need to redirect to `/profile` which is the ProfilePage component
-      // Needed queryParams are: userId, email, iat, exp
+    const qs = urlParams.toString();
 
-      const urlParams = new URLSearchParams();
-      urlParams.set("userId", data.userId);
-      urlParams.set("email", data.email);
-      urlParams.set("iat", data.iat);
-      urlParams.set("exp", data.exp);
-
-      const qs = urlParams.toString();
-
-      // TODO: why is history undefined?
-      console.log(history);
-            // history.push(`/profile?${qs}`);
-
-  }
+    history.push(`/profile?${qs}`);
+  };
 
   const onRefresh = () => {
     console.log("TODO: onRefresh");
@@ -48,25 +39,29 @@ const AppRouter = () => {
   };
 
   return (
-    <BrowserRouter>
-      <Layout>
-        <RefreshModal
-          enabled={!!user.email}
-          exp={user.exp}
-          onLogout={onLogout}
-          refresh={onRefresh}
-          secondsRemaining={460}
-        />
-        <div className={classes.App}>
-          <h1>OAuth Practice App</h1>
-          <Route path="/lwa" component={LoginWithAmazon} />
-          <Route path="/netlify-oauth" component={NetlifyApp} />
-          <Route path="/profile" component={ProfilePage} />
-        </div>
-      </Layout>
-    </BrowserRouter>
+    <Layout>
+      <RefreshModal
+        enabled={!!user.email}
+        exp={user.exp}
+        onLogout={onLogout}
+        refresh={onRefresh}
+        secondsRemaining={460}
+      />
+      <div className={classes.App}>
+        <h1>OAuth Practice App</h1>
+        <Route path="/lwa" component={LoginWithAmazon} />
+        <Route path="/netlify-oauth" component={NetlifyApp} />
+        <Route path="/profile" component={ProfilePage} />
+      </div>
+    </Layout>
   );
 };
+
+const AppRouter = () => (
+  <BrowserRouter>
+    <AppLayout />
+  </BrowserRouter>
+);
 
 const withAuthProvider = Component => {
   return () => (
