@@ -26,9 +26,11 @@ export const handler = async (event: APIGatewayEvent) => {
   }
 
   try {
+    // TODO: these are old valuees and are not the ones we want
     const { email, userId, exp, iat } = decodeJwtPayload(parsedCookie.jwt);
 
     const response = await authWithEmail(email);
+    console.log({response});
 
     return {
       statusCode: 200,
