@@ -21,21 +21,19 @@ const AppLayout = () => {
   };
   checkUser();
 
-  const onRefreshData = data => {
-    const urlParams = new URLSearchParams();
-    urlParams.set("userId", data.userId);
-    urlParams.set("email", data.email);
-    urlParams.set("iat", data.iat);
-    urlParams.set("exp", data.exp);
-
-    const qs = urlParams.toString();
-
-    history.push(`/profile?${qs}`);
-  };
-
   const onRefresh = () => {
-    console.log("TODO: onRefresh");
-    refresh().then(onRefreshData);
+    refresh().then(data => {
+      const urlParams = new URLSearchParams();
+      urlParams.set("userId", data.userId);
+      urlParams.set("email", data.email);
+      urlParams.set("iat", data.iat);
+      urlParams.set("exp", data.exp);
+  
+      const qs = urlParams.toString();
+      console.log({qs});
+  
+      history.push(`/profile?${qs}`);
+    });
   };
 
   return (
