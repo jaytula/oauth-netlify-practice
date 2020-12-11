@@ -30,10 +30,7 @@ const AppLayout = () => {
       urlParams.set("exp", data.exp);
   
       const qs = urlParams.toString();
-      console.log({qs});
   
-      // TODO: It seems like refreshing doesn't quite work until done a second
-      // time relatively quickly
       history.push(`/profile?${qs}`);
     });
   };
