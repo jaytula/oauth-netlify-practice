@@ -37,6 +37,6 @@ export const authWithEmail = async (email: string) => {
       "Set-Cookie": jwtCookie,
       "Location": `/profile?${searchParams.toString()}`
     },
-    body: JSON.stringify({ existingUser, jwtCookie }, null, 2),
+    body: JSON.stringify({ existingUser, jwtCookie, payload }, null, 2),
   };
 }

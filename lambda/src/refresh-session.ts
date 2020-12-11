@@ -27,10 +27,12 @@ export const handler = async (event: APIGatewayEvent) => {
 
   try {
     // TODO: these are old valuees and are not the ones we want
-    const { email, userId, exp, iat } = decodeJwtPayload(parsedCookie.jwt);
+    const { email } = decodeJwtPayload(parsedCookie.jwt);
 
     const response = await authWithEmail(email);
-    console.log({response});
+    const body = JSON.parse(response.body)
+    const payload = body.payload as {email: string, userId: string, exp: string, iat: string}
+    const {userId, exp, iat} = payload;
 
     return {
       statusCode: 200,
