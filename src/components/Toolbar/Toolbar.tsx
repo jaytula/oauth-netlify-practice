@@ -59,6 +59,7 @@ const Toolbar: React.FC = ({ children }) => {
           <Fragment>
             <Link to="/lwa">LWA</Link>{" "}
             <Link to="/netlify-oauth">Netlify OAuth</Link>{" "}
+            <Link to="/google-oauth">Google OAuth</Link>{" "}
           </Fragment>
         )}
         {user.email && <Link to="/profile">Profile</Link>}

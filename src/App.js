@@ -3,6 +3,7 @@ import { BrowserRouter, Route, useHistory } from "react-router-dom";
 import classes from "./App.module.css";
 import Layout from "./components/Layout/Layout";
 import LoginWithAmazon from "./components/Pages/LoginWithAmazon";
+import GoogleOauthApp from "./components/Pages/GoogleOauthApp/GoogleOauthApp";
 import NetlifyApp from "./components/Pages/NetlfiyApp/NetlifyApp";
 import ProfilePage from "./components/Pages/ProfilePage";
 import { RefreshModal } from "@groundearth0/auth-utils";
@@ -48,6 +49,7 @@ const AppLayout = () => {
         <h1>OAuth Practice App</h1>
         <Route path="/lwa" component={LoginWithAmazon} />
         <Route path="/netlify-oauth" component={NetlifyApp} />
+        <Route path="/google-oauth" component={GoogleOauthApp} />
         <Route path="/profile" component={ProfilePage} />
       </div>
     </Layout>
