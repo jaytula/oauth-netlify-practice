@@ -8,3 +8,7 @@ https://developers.google.com/identity/protocols/oauth2#clientside
   - Fill Oauth consent screen stuff
   - Create Oauth credentials
   - Place GOOGLE_OAUTH_CLIENT_ID and GOOGLE_OAUTH_CLIENT_SECRET as env vars
+
+  ## Links
+
+Google API Javascript client library: https://github.com/google/google-api-javascript-client
