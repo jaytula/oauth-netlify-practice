@@ -7,6 +7,12 @@ import GoogleLogin, {
 const GOOGLE_OAUTH_CLIENT_ID =
   process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID || "";
 
+function isGoogleLoginResponse(
+  response: GoogleLoginResponseOffline | GoogleLoginResponse
+): response is GoogleLoginResponse {
+  return (response as GoogleLoginResponse).getBasicProfile !== undefined;
+}
+
 const GoogleOauthApp = () => {
   // TODO: Google Sign-In JavaScript client
   // Reference: https://developers.google.com/identity/sign-in/web/reference
@@ -16,7 +22,10 @@ const GoogleOauthApp = () => {
   const onSuccess: (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => void = (response) => {
-    console.log(response);
+    if (isGoogleLoginResponse(response)) {
+      const basicProfile = response.getBasicProfile();
+      console.log({ basicProfile });
+    }
   };
 
   const onFailure = (err: any) => {
