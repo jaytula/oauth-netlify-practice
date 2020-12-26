@@ -24,7 +24,11 @@ const GoogleOauthApp = () => {
   ) => void = (response) => {
     if (isGoogleLoginResponse(response)) {
       const basicProfile = response.getBasicProfile();
-      console.log({ basicProfile });
+
+      // TODO: Should sent the `id_token` to a backend endpoint
+      // https://developers.google.com/identity/sign-in/web/backend-auth
+      const id_token = response.getAuthResponse().id_token;
+      console.log({id_token});
     }
   };
 
