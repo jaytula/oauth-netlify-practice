@@ -8,7 +8,7 @@ export const handler = async (event: APIGatewayEvent) => {
   return {
     statusCode: 200,
     headers: {
-      'Conten-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
 
     body: JSON.stringify(queryStringParameters)
