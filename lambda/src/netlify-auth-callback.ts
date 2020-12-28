@@ -1,4 +1,4 @@
-import querystring from "querystring";
+// import querystring from "querystring";
 import { authorizationCodeClient, REDIRECT_URL } from "./utils/netlify-auth";
 import { getUser } from "./utils/netlify-api";
 import { APIGatewayEvent } from "aws-lambda";
@@ -17,9 +17,9 @@ export const handler = async (event: APIGatewayEvent) => {
   }
 
   /* Grant the grant code */
-  const code = event.queryStringParameters.code;
+  const code = event.queryStringParameters.code || '';
   /* state helps mitigate CSRF attacks & Restore the previous state of your app */
-  const state = querystring.parse(event.queryStringParameters.state);
+  // const state = querystring.parse(event.queryStringParameters.state);
 
   try {
     /* Take the grant code and exchange for an accessToken */
