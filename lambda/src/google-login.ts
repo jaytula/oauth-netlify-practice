@@ -5,6 +5,8 @@ export const handler = async (event: APIGatewayEvent) => {
 
   console.log({queryStringParameters});
 
+  // TODO: Verify integrity of ID Token
+  // https://developers.google.com/identity/sign-in/web/backend-auth
   return {
     statusCode: 200,
     headers: {
