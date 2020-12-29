@@ -25,10 +25,10 @@ const GoogleOauthApp = () => {
     if (isGoogleLoginResponse(response)) {
       const basicProfile = response.getBasicProfile();
 
-      // TODO: Should sent the `id_token` to a backend endpoint
-      // https://developers.google.com/identity/sign-in/web/backend-auth
       const id_token = response.getAuthResponse().id_token;
-      fetch(`/.netlify/functions/google-login?id_token=${id_token}`)
+      fetch(`/.netlify/functions/google-login?id_token=${id_token}`, {
+        method: "POST",
+      })
         .then((res) => res.json())
         .then((data) => {
           console.log({ data });
