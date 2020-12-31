@@ -15,7 +15,7 @@ const ProfilePage = () => {
     if (userId && email) {
       handleLogin({ userId, email, iat, exp });
     }
-  }, [userId, email]);
+  }, [userId, email, iat, exp, handleLogin]);
 
   if(userId === user.userId) {
     return <Redirect to="/profile" />
