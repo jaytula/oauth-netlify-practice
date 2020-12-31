@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import dayjs from "dayjs";
-import cookie from 'cookie';
 
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/auth-provider";
