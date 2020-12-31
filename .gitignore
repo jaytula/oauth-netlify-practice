@@ -33,3 +33,4 @@ jwtRS256.key.pub
 /lambda/build
 local-packages
 *.swp
+.eslintcache
