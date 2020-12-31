@@ -25,6 +25,8 @@ const GoogleOauthApp = () => {
     if (isGoogleLoginResponse(response)) {
       const basicProfile = response.getBasicProfile();
 
+      console.log({basicProfile})
+
       const id_token = response.getAuthResponse().id_token;
       fetch(`/.netlify/functions/google-login?id_token=${id_token}`, {
         method: "POST",
