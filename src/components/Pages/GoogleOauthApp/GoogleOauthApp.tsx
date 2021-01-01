@@ -23,12 +23,12 @@ const GoogleOauthApp = () => {
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => void = (response) => {
     if (isGoogleLoginResponse(response)) {
-      const basicProfile = response.getBasicProfile();
 
-      console.log({basicProfile})
+      const searchParams = new URLSearchParams();
+      searchParams.set('id', response.getId())
+      searchParams.set('id_token', response.getAuthResponse().id_token);
 
-      const id_token = response.getAuthResponse().id_token;
-      fetch(`/.netlify/functions/google-login?id_token=${id_token}`, {
+      fetch(`/.netlify/functions/google-login?${searchParams.toString()}`, {
         method: "POST",
       })
         .then((res) => res.json())
