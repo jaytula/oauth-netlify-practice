@@ -12,6 +12,7 @@ export const handler = async (event: APIGatewayEvent) => {
     }
   }
   const id_token = queryStringParameters.id_token as string;
+  const id = queryStringParameters.id as string;
 
   const client = new OAuth2Client(CLIENT_ID);
   const ticket = await client.verifyIdToken({idToken: id_token, audience: CLIENT_ID})
@@ -22,16 +23,28 @@ export const handler = async (event: APIGatewayEvent) => {
     }
   }
   
-  const userid = payload['sub']
-
   // TODO: Verify integrity of ID Token
   // https://developers.google.com/identity/sign-in/web/backend-auth
+  const userid = payload['sub']
+
+  if(id !== userid) {
+    return {
+      statusCode: 401,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'non-matching userId'
+      })
+    }
+  }
+
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json'
     },
 
-    body: JSON.stringify({userid})
+    body: JSON.stringify({userid, valid: id === userid})
   }
 };
