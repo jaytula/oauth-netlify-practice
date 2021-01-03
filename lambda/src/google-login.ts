@@ -26,6 +26,7 @@ export const handler = async (event: APIGatewayEvent) => {
   // TODO: Verify integrity of ID Token
   // https://developers.google.com/identity/sign-in/web/backend-auth
   const userid = payload['sub']
+  const email = payload['email']
 
   if(id !== userid) {
     return {
@@ -45,6 +46,6 @@ export const handler = async (event: APIGatewayEvent) => {
       'Content-Type': 'application/json'
     },
 
-    body: JSON.stringify({userid, valid: id === userid})
+    body: JSON.stringify({userid, valid: id === userid, email})
   }
 };
