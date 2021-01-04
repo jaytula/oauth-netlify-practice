@@ -1,5 +1,6 @@
 import { APIGatewayEvent } from "aws-lambda";
 import {OAuth2Client} from 'google-auth-library';
+import {authWithEmail} from './helpers/auth-helpers'
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID as string;
 
@@ -26,7 +27,7 @@ export const handler = async (event: APIGatewayEvent) => {
   // TODO: Verify integrity of ID Token
   // https://developers.google.com/identity/sign-in/web/backend-auth
   const userid = payload['sub']
-  const email = payload['email']
+  const email = payload['email'] as string
 
   if(id !== userid) {
     return {
@@ -39,6 +40,10 @@ export const handler = async (event: APIGatewayEvent) => {
       })
     }
   }
+
+  // TODO: figure out why this causes 500 error
+  const result = await authWithEmail(email);
+  console.log({result});
 
   return {
     statusCode: 200,
