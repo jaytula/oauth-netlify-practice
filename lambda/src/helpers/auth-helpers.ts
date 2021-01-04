@@ -22,6 +22,7 @@ export const authWithEmail = async (email: string) => {
   const jwtPayload = createJwtPayload(existingUser._id, email);
   const jwtCookie = createJwtCookieFromPayload(jwtPayload);
 
+  // TODO: Token expired on google login and netlify login
   const payload = decodeJwtPayload(jwtPayload);
 
   const searchParams = new URLSearchParams();
