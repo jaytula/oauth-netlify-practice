@@ -43,14 +43,13 @@ export const handler = async (event: APIGatewayEvent) => {
 
   // TODO: figure out why this causes 500 error
   const result = await authWithEmail(email);
-  console.log({result});
-
   return {
     statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json'
+    header: {
+      'Content-Type': 'application/json',
     },
-
-    body: JSON.stringify({userid, valid: id === userid, email})
+    body: JSON.stringify({
+      redirect: result.headers['Location']
+    })
   }
 };
