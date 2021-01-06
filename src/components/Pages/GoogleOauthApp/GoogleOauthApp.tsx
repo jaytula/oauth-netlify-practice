@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useHistory} from 'react-router'
 import GoogleLogin, {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
@@ -14,6 +15,7 @@ function isGoogleLoginResponse(
 }
 
 const GoogleOauthApp = () => {
+  const history = useHistory();
   // TODO: Google Sign-In JavaScript client
   // Reference: https://developers.google.com/identity/sign-in/web/reference
   // Article: https://developers.google.com/identity/sign-in/web/sign-in
@@ -34,7 +36,7 @@ const GoogleOauthApp = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log({ data });
-          window.location.href = data.redirect;
+          history.push(data.redirect);
         });
     }
   };

@@ -13,6 +13,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (userId && email) {
+      console.log({userId, email})
       handleLogin({ userId, email, iat, exp });
     }
   }, [userId, email, iat, exp, handleLogin]);
