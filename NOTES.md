@@ -36,3 +36,9 @@ lt -h https://serverless.social -p 8888 -s subdomain
 ## Links
 
 https://medium.com/swlh/typescript-with-mongoose-and-node-express-24073d51d2ee
+
+## CertBot Cloudflare DNS01 Renewal
+
+```shell
+sudo certbot renew --dns-cloudflare --dns-cloudflare-credentials ./.secrets/certbot/cloudflare.ini
+```
