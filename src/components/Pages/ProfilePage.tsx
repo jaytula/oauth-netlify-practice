@@ -8,8 +8,8 @@ const ProfilePage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("userId");
   const email = urlParams.get("email");
-  const iat = urlParams.get("iat");
-  const exp = urlParams.get("exp");
+  const iat = Number(urlParams.get("iat") || 0);
+  const exp = Number(urlParams.get("exp") || 0);
 
   useEffect(() => {
     if (userId && email) {
